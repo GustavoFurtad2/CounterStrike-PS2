@@ -2,6 +2,8 @@
 
 #include <tyra>
 
+#include "image.hpp"
+
 namespace Game {
 
     class Game : public Tyra::Game {
@@ -17,6 +19,7 @@ namespace Game {
         private:
 
             Tyra::Engine* engine;
+
     };
 
 }
