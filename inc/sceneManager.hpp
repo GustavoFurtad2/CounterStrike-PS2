@@ -7,7 +7,7 @@
 #include "scenes/menu.hpp"
 #include "scenes/gameplay.hpp"
 
-namespace SceneManager {
+namespace Cs::SceneManager {
 
     Scene currentScene;
 
@@ -27,7 +27,7 @@ namespace SceneManager {
 
                     menu = std::make_unique<Menu>(engine);
                     menu->init();
-                    menu->loop();
+                    menu->update();
                 }
                 
                 break;
@@ -37,7 +37,7 @@ namespace SceneManager {
 
                     gameplay = std::make_unique<Gameplay>(engine);
                     gameplay->init();
-                    gameplay->loop();
+                    gameplay->update();
                 }
                 
                 break;
@@ -50,12 +50,12 @@ namespace SceneManager {
 
             case Scene::MENU:
 
-                menu->loop();
+                menu->update();
 
                 break;
             case Scene::GAMEPLAY:
 
-                gameplay->loop();
+                gameplay->update();
 
                 break;
         };

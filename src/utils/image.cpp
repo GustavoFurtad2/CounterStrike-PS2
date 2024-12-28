@@ -1,4 +1,4 @@
-#include "image.hpp"
+#include "utils/image.hpp"
 
 Image::Image(Tyra::Engine* t_engine, const char path[], Tyra::Vec2 position, Tyra::Vec2 size) : engine(t_engine) {
 

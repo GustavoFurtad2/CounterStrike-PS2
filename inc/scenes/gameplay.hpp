@@ -2,6 +2,8 @@
 
 #include <tyra>
 
+#include "player/player.hpp"
+
 class Gameplay {
 
     public:
@@ -10,10 +12,12 @@ class Gameplay {
         ~Gameplay();
 
         void init();
-        void loop();
+        void update();
 
     private:
 
         Tyra::Engine* engine;
+
+        Player player;
 
 };

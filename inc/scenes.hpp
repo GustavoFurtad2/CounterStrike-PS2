@@ -1,6 +1,6 @@
 #pragma once
 
-namespace SceneManager {
+namespace Cs::SceneManager {
 
     enum class Scene {
         MENU,

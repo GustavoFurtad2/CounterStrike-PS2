@@ -1,8 +1,7 @@
+#include "scenes.hpp"
 #include "scenes/menu.hpp"
 
-#include "scenes.hpp"
-
-namespace SceneManager {
+namespace Cs::SceneManager {
     void setScene(Tyra::Engine* engine, Scene newScene);
 }
 
@@ -15,20 +14,20 @@ Menu::~Menu() {}
 
 void Menu::init() {}
 
-void Menu::loop() {
+void Menu::update() {
 
-        auto& renderer = engine->renderer;
+    auto& renderer = engine->renderer;
 
-        renderer.beginFrame();
+    renderer.beginFrame();
 
-        if (engine->pad.getPressed().Cross) {
+    if (engine->pad.getPressed().Cross) {
 
-            SceneManager::setScene(engine, SceneManager::Scene::GAMEPLAY);
-        }
+        Cs::SceneManager::setScene(engine, Cs::SceneManager::Scene::GAMEPLAY);
+    }
 
-        background.draw();
+    background.draw();
 
-        title.draw();
+    title.draw();
 
-        renderer.endFrame();
+    renderer.endFrame();
 }

@@ -2,7 +2,7 @@
 
 #include <tyra>
 
-#include "image.hpp"
+#include "utils/image.hpp"
 
 class Menu {
 
@@ -12,7 +12,7 @@ class Menu {
         ~Menu();
 
         void init();
-        void loop();
+        void update();
 
     private:
 

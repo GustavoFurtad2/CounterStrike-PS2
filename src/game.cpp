@@ -2,7 +2,7 @@
 
 #include "sceneManager.hpp"
 
-namespace Game {
+namespace Cs {
 
     using namespace Tyra;
 
@@ -12,12 +12,12 @@ namespace Game {
 
     void Game::init() {
 
-        setScene(engine, SceneManager::Scene::MENU);
+        setScene(engine, Cs::SceneManager::Scene::MENU);
     }
 
     void Game::loop() {
 
-        SceneManager::updateCurrentScene();
+        Cs::SceneManager::updateCurrentScene();
     }
 
 }

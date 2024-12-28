@@ -2,9 +2,9 @@
 
 #include <tyra>
 
-#include "image.hpp"
+#include "utils/image.hpp"
 
-namespace Game {
+namespace Cs {
 
     class Game : public Tyra::Game {
 

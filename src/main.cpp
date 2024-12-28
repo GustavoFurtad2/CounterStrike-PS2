@@ -3,9 +3,9 @@
 
 int main() {
 
-  Tyra::Engine engine;
-  Game::Game game(&engine);
-  engine.run(&game);
-  SleepThread();
-  return 0;
+    Tyra::Engine engine;
+    Cs::Game game(&engine);
+    engine.run(&game);
+    SleepThread();
+    return 0;
 }
