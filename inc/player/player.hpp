@@ -13,6 +13,10 @@ class Player {
 
         void update();
 
+        Tyra::CameraInfo3D getCameraInfo() {
+            return camera.getCameraInfo();
+        }
+
     private:
 
         Tyra::Camera camera;

@@ -2,6 +2,7 @@
 
 #include <tyra>
 
+#include "utils/model.hpp"
 #include "player/player.hpp"
 
 class Gameplay {
@@ -19,5 +20,8 @@ class Gameplay {
         Tyra::Engine* engine;
 
         Player player;
+
+        Model map;
+        Model usp;
 
 };
