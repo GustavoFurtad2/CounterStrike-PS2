@@ -1,0 +1,2 @@
+plus hud7.png 223 25 17 23
+minus hud7.png 210 25 13 23

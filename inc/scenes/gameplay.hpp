@@ -2,8 +2,9 @@
 
 #include <tyra>
 
-#include "utils/model.hpp"
 #include "player/player.hpp"
+#include "utils/staticModel.hpp"
+#include "utils/textureAtlas.hpp"
 
 class Gameplay {
 
@@ -20,6 +21,8 @@ class Gameplay {
         Tyra::Engine* engine;
 
         Player player;
+
+        TextureAtlas health;
 
         Model map;
         Model usp;
