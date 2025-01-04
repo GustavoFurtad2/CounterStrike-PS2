@@ -46,19 +46,27 @@ TextureAtlas::TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], con
         sprite.position = Tyra::Vec2(0, 0);
 
         sprites.emplace_back(sprite);
-
-        TYRA_LOG("FN: ", filename, " OX: ", offsetX, " OY: ", offsetY, " W: ", width, " H: ", height);
     }
 }
+
+Tyra::Sprite* TextureAtlas::getSprite(size_t index) {
+
+    if (index < sprites.size()) {
+        return &sprites[index];
+    }
+
+    return nullptr;
+}
+
+void TextureAtlas::drawSprite(size_t index, const Tyra::Color& color) {
+
+    sprites[index].color = color;
+
+    engine->renderer.renderer2D.render(sprites[index]);
+}
+
 
 TextureAtlas::~TextureAtlas() {
 
     engine->renderer.getTextureRepository().freeBySprite(atlasTexture);
-}
-
-void TextureAtlas::draw() {
-
-    for (const auto& sprite : sprites) {
-        engine->renderer.renderer2D.render(sprite);
-    }
 }

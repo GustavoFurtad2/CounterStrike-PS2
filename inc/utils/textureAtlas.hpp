@@ -13,7 +13,9 @@ class TextureAtlas {
         TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], const char configPath[], Tyra::Vec2 size);
         ~TextureAtlas();
 
-        void draw();
+        Tyra::Sprite* getSprite(size_t index);
+
+        void drawSprite(size_t index, const Tyra::Color& color);
 
     private:
 
