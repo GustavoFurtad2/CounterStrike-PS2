@@ -2,9 +2,4 @@
 
 Counter Strike PS2 is a recreation of the game Counter Strike for the Playstation 2
 
-# TO DO LIST
-
-    - BOTS
-    - PHYSICS
-    - MORE MAPS
-    - ONLINE
+Currently the project is in pre-alpha(also known as prototype)
