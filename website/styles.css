@@ -1,0 +1,93 @@
+body {
+    background-color: rgb(41, 41, 41);
+    margin: 0;
+    padding: 0;
+}
+
+
+#topbar {
+    background-color: rgb(54, 54, 54);
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    justify-content: space-between;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 48px;
+    max-height: 48px;
+}
+
+@font-face {
+    font-family: 'cs_regular';
+    src: url('./cs_regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#topbar #title {
+    font-family: 'cs_regular';
+    font-size: 2.5vh;
+    text-align: left;
+    transform: scaleY(1.25);
+    margin-left: 4vw;
+    color: yellow;
+    text-decoration: none;
+    flex-grow: 0;
+}
+
+#topbar #links a {
+    font-family: 'cs_regular';
+    color: white;
+    text-align: right;
+    font-size: 2.5vh;
+    text-decoration: none;
+    flex-grow: 0;
+    text-decoration: none;
+    margin-right: 3vw;
+}
+
+#topbar #links a {
+    margin-left: 2vw;
+}
+
+#intro {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 15vh;
+}
+
+#lastvideo {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+#lastvideo iframe {
+    min-width: 40vw;
+    min-height: 45vh;
+    max-width: 40vw;
+    max-height: 45vh;
+}
+
+#download {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+#download #title {
+    color: yellow;
+    font-family: 'cs_regular';
+    transform: scaleY(1.25);
+    font-size: 2vh;
+}
