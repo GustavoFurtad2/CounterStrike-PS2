@@ -81,7 +81,8 @@ body {
 #download {
     color: white;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 5vh;
 }
 
@@ -90,4 +91,24 @@ body {
     font-family: 'cs_regular';
     transform: scaleY(1.25);
     font-size: 2vh;
+}
+
+#download #versions {
+    align-items: center;
+    margin-top: 2vh;
+    gap: 1vh;
+}
+
+#download #versions a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 17vw;
+    height: 6vh;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(54, 54, 54);
+    border-radius: 5px;
 }
