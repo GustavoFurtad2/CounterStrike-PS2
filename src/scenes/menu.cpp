@@ -20,7 +20,7 @@ void Menu::update() {
 
     renderer.beginFrame();
 
-    if (engine->pad.getPressed().Cross) {
+    if (engine->pad.getPressed().Cross == true) {
 
         Cs::SceneManager::setScene(engine, Cs::SceneManager::Scene::GAMEPLAY);
     }
