@@ -5,9 +5,9 @@ HUD::HUD(Tyra::Engine* t_engine)
     hud7(t_engine, "assets/gameplay/hud/textures/640hud7.png", "assets/gameplay/hud/config/hud.txt", Tyra::Vec2(256, 256)),
     radar(t_engine, "assets/gameplay/hud/textures/radar.png", Tyra::Vec2(0, 0), Tyra::Vec2(128, 128)) {
 
-    hud7.getSprite(10)->position = Tyra::Vec2(10, 405);
-    hud7.getSprite(12)->position = Tyra::Vec2(105, 411);
-    hud7.getSprite(13)->position = Tyra::Vec2(180, 412);
+    hud7.getSprite(10)->position = Tyra::Vec2(10, 411);
+    hud7.getSprite(12)->position = Tyra::Vec2(105, 412);
+    hud7.getSprite(13)->position = Tyra::Vec2(200, 412);
     hud7.getSprite(15)->position = Tyra::Vec2(473, 407);
     hud7.getSprite(16)->position = Tyra::Vec2(414, 416);
     hud7.getSprite(17)->position = Tyra::Vec2(394, 373);
@@ -100,8 +100,8 @@ void HUD::draw(int bulletsGun, int bulletsPerCartridge, int cartridges) {
 
     displayNumber(bulletsGun, Tyra::Vec2(384, 414), Tyra::Color(252, 140, 0, 48));
     displayNumber(cartridges * bulletsPerCartridge, Tyra::Vec2(454, 414), Tyra::Color(252, 140, 0, 48));
-    displayNumber(0, Tyra::Vec2(140, 414), Tyra::Color(252, 140, 0, 48));
-    displayNumber((int)health, Tyra::Vec2(74, 406), Tyra::Color(252, 140, 0, 48));
+    displayNumber(0, Tyra::Vec2(155, 414), Tyra::Color(252, 140, 0, 48));
+    displayNumber((int)health, Tyra::Vec2(64, 414), Tyra::Color(252, 140, 0, 48));
 
     drawMoney();
     drawTimer();
