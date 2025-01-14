@@ -2,7 +2,7 @@
 
 #include <tyra>
 
-#include "player/gun.hpp"
+#include "player/item.hpp"
 #include "player/camera.hpp"
 #include "scenes/gameplay/hud.hpp"
 

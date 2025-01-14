@@ -1,6 +1,6 @@
 #include "player/player.hpp"
 
-Player::Player(Tyra::Engine* t_engine) : hud(t_engine), camera(&t_engine->pad), usp(t_engine, "assets/gameplay/guns/usp/usp.obj", "assets/gameplay/guns/usp/") {}
+Player::Player(Tyra::Engine* t_engine) : hud(t_engine), camera(&t_engine->pad), usp(t_engine, "usp", 30, "assets/gameplay/guns/usp/usp.obj", "assets/gameplay/guns/usp/") {}
 
 Player::~Player() {}
 
