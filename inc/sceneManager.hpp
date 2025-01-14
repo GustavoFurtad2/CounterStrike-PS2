@@ -4,8 +4,8 @@
 
 #include "scenes.hpp"
 
-#include "scenes/menu.hpp"
-#include "scenes/gameplay.hpp"
+#include "scenes/menu/menu.hpp"
+#include "scenes/gameplay/gameplay.hpp"
 
 namespace Cs::SceneManager {
 
@@ -23,6 +23,8 @@ namespace Cs::SceneManager {
 
             case Scene::MENU:
 
+                TYRA_LOG("MENUUUUUUUUUU");
+
                 if (!menu) {
 
                     menu = std::make_unique<Menu>(engine);
@@ -32,6 +34,8 @@ namespace Cs::SceneManager {
                 
                 break;
             case Scene::GAMEPLAY:
+
+                TYRA_LOG("GAMPLAYUUUUUUUUUUUUUUU");
 
                 if (!gameplay) {
 

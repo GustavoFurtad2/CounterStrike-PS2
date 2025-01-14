@@ -10,6 +10,7 @@ class Image {
         ~Image();
 
         void draw();
+        void draw(Tyra::Color color);
 
     private:
 

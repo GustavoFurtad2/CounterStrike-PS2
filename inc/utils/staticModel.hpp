@@ -23,8 +23,6 @@ class Model {
 
         Tyra::Engine* engine;
 
-        Tyra::Vec4 angle;
-
         Tyra::StaticPipeline stapip;
 
         Tyra::StaPipOptions renderOptions;

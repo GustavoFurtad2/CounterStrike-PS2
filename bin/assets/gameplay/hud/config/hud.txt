@@ -13,3 +13,7 @@ suit_full hud7.png 0 25 24 24
 suit_empty hud7.png 24 25 24 24
 stopwatch hud7.png 144 72 24 24
 minus hud7.png 210 25 13 23
+ammo hud7.png 96 72 24 24
+bar hud7.png 240 0 2 24
+dollar hud7.png 192 25 18 25
+buyzone	hud7.png 96	148	32 32

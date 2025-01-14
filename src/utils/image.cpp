@@ -26,3 +26,10 @@ void Image::draw() {
 
     engine->renderer.renderer2D.render(image);
 }
+
+void Image::draw(Tyra::Color color) {
+
+    image.color = color;
+
+    engine->renderer.renderer2D.render(image);
+}

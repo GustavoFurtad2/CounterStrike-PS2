@@ -22,9 +22,6 @@ class Gameplay {
 
         Player player;
 
-        TextureAtlas hud7;
-
         Model map;
-        Model usp;
-
+        
 };

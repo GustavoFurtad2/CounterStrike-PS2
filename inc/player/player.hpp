@@ -2,22 +2,30 @@
 
 #include <tyra>
 
+#include "player/gun.hpp"
 #include "player/camera.hpp"
+#include "scenes/gameplay/hud.hpp"
 
 class Player {
 
     public:
 
-        Player(Tyra::Pad* t_pad);
+        Player(Tyra::Engine* t_engine);
         ~Player();
 
         void update();
+        void drawHUD();
+        void drawGun();
 
         Tyra::CameraInfo3D getCameraInfo() {
             return camera.getCameraInfo();
         }
 
     private:
+
+        HUD hud;
+
+        Gun usp;
 
         Tyra::Camera camera;
 

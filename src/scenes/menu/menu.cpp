@@ -1,5 +1,5 @@
 #include "scenes.hpp"
-#include "scenes/menu.hpp"
+#include "scenes/menu/menu.hpp"
 
 namespace Cs::SceneManager {
     void setScene(Tyra::Engine* engine, Scene newScene);
@@ -21,6 +21,8 @@ void Menu::update() {
     renderer.beginFrame();
 
     if (engine->pad.getPressed().Cross == true) {
+
+        TYRA_LOG("TROCANDO PRA GMPLY PIPIPIPIPI");
 
         Cs::SceneManager::setScene(engine, Cs::SceneManager::Scene::GAMEPLAY);
     }
