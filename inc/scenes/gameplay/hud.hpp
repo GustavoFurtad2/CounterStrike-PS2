@@ -36,5 +36,14 @@ class HUD {
 
         TextureAtlas hud7;
         Image radar;
+
+        Tyra::Sprite* cross;
+        Tyra::Sprite* suitEmpty;
+        Tyra::Sprite* stopwatch;
+        Tyra::Sprite* minus;
+        Tyra::Sprite* ammo;
+        Tyra::Sprite* bar;
+        Tyra::Sprite* dollar;
+        Tyra::Sprite* buyzone;
     
 };

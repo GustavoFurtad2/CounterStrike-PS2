@@ -5,13 +5,21 @@ HUD::HUD(Tyra::Engine* t_engine)
     hud7(t_engine, "assets/gameplay/hud/textures/640hud7.png", "assets/gameplay/hud/config/hud.txt", Tyra::Vec2(256, 256)),
     radar(t_engine, "assets/gameplay/hud/textures/radar.png", Tyra::Vec2(0, 0), Tyra::Vec2(128, 128)) {
 
-    hud7.getSprite(10)->position = Tyra::Vec2(10, 411);
-    hud7.getSprite(12)->position = Tyra::Vec2(105, 412);
-    hud7.getSprite(13)->position = Tyra::Vec2(200, 412);
-    hud7.getSprite(15)->position = Tyra::Vec2(473, 407);
-    hud7.getSprite(16)->position = Tyra::Vec2(414, 416);
-    hud7.getSprite(17)->position = Tyra::Vec2(394, 373);
-    hud7.getSprite(18)->position = Tyra::Vec2(10, 198);
+    cross = hud7.getSprite(10);
+    suitEmpty = hud7.getSprite(12);
+    stopwatch = hud7.getSprite(13);
+    minus = hud7.getSprite(15);
+    ammo = hud7.getSprite(16);
+    bar = hud7.getSprite(17);
+    dollar = hud7.getSprite(18);
+
+    cross->position = Tyra::Vec2(10, 411);
+    suitEmpty->position = Tyra::Vec2(105, 412);
+    stopwatch->position = Tyra::Vec2(200, 412);
+    minus->position = Tyra::Vec2(473, 407);
+    ammo->position = Tyra::Vec2(414, 416);
+    bar->position = Tyra::Vec2(394, 373);
+    dollar->position = Tyra::Vec2(10, 198);
 }
 
 HUD::~HUD() {
@@ -28,10 +36,10 @@ void HUD::displayNumber(unsigned int number, Tyra::Vec2 position, Tyra::Color co
 
         offsetX = 74 - (numberString.length() - 1 - i) * 19;
 
-        int algarism = numberString[i] - '0';
+        int digit = numberString[i] - '0';
 
-        hud7.getSprite(algarism)->position = Tyra::Vec2(offsetX + position.x - 74, position.y);
-        hud7.drawSprite(algarism, color);
+        hud7.getSprite(digit)->position = Tyra::Vec2(offsetX + position.x - 74, position.y);
+        hud7.drawSprite(digit, color);
     }
 }
 
@@ -101,7 +109,7 @@ void HUD::draw(int bulletsGun, int bulletsPerCartridge, int cartridges) {
     displayNumber(bulletsGun, Tyra::Vec2(384, 414), Tyra::Color(252, 140, 0, 48));
     displayNumber(cartridges * bulletsPerCartridge, Tyra::Vec2(454, 414), Tyra::Color(252, 140, 0, 48));
     displayNumber(0, Tyra::Vec2(155, 414), Tyra::Color(252, 140, 0, 48));
-    displayNumber((int)health, Tyra::Vec2(64, 414), Tyra::Color(252, 140, 0, 48));
+    displayNumber(static_cast<int>(health), Tyra::Vec2(64, 414), Tyra::Color(252, 140, 0, 48));
 
     drawMoney();
     drawTimer();
