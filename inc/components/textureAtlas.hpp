@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <unordered_map>
 
 class TextureAtlas {
 
@@ -13,16 +14,18 @@ class TextureAtlas {
         TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], const char configPath[], Tyra::Vec2 size);
         ~TextureAtlas();
 
-        Tyra::Sprite* getSprite(size_t index);
+        Tyra::Sprite* getSprite(const std::string& name);
 
-        void drawSprite(size_t index, const Tyra::Color& color);
+        void renderSprite(const std::string& name);
+        void renderSprite(const std::string& name, const Tyra::Color& color);
 
     private:
 
         Tyra::Engine* engine;
 
-        Tyra::Sprite atlasTexture;
+        Tyra::Sprite atlas;
 
         std::vector<Tyra::Sprite> sprites;
+        std::unordered_map<std::string, size_t> spriteNames;
 
 };

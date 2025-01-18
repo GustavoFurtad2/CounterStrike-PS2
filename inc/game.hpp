@@ -2,7 +2,10 @@
 
 #include <tyra>
 
-#include "utils/image.hpp"
+#include "scene.hpp"
+#include "sceneManager.hpp"
+#include "scenes/menu/menu.hpp"
+#include "scenes/gameplay/gameplay.hpp"
 
 namespace Cs {
 
@@ -19,6 +22,8 @@ namespace Cs {
         private:
 
             Tyra::Engine* engine;
+
+            SceneManager sceneManager;
 
     };
 

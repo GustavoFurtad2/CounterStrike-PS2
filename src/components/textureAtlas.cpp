@@ -1,4 +1,4 @@
-#include "utils/textureAtlas.hpp"
+#include "components/textureAtlas.hpp"
 
 TextureAtlas::TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], const char configPath[], Tyra::Vec2 size) : engine(t_engine) {
 
@@ -9,25 +9,20 @@ TextureAtlas::TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], con
         TYRA_ERROR("Failed to load configuration file");
     }
 
-    atlasTexture.mode = Tyra::SpriteMode::MODE_STRETCH;
-    atlasTexture.position = Tyra::Vec2(0, 0);
-    atlasTexture.size = size;
+    atlas.mode = Tyra::SpriteMode::MODE_STRETCH;
+    atlas.position = Tyra::Vec2(0, 0);
+    atlas.size = size;
 
     auto& textureRepository = engine->renderer.getTextureRepository();
 
     auto filepath = Tyra::FileUtils::fromCwd(texturePath);
-
     auto* texture = textureRepository.add(filepath);
 
-    texture->addLink(atlasTexture.id);
+    texture->addLink(atlas.id);
 
     std::string line;
 
-    int i = 0;
-
     while (std::getline(configFile, line)) {
-
-        i++;
 
         std::string name, filename;
 
@@ -39,34 +34,51 @@ TextureAtlas::TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], con
 
         Tyra::Sprite sprite;
 
-        sprite.id = atlasTexture.id;
+        sprite.id = atlas.id;
         sprite.mode = Tyra::SpriteMode::MODE_REPEAT;
         sprite.size = Tyra::Vec2(width, height);
         sprite.offset = Tyra::Vec2(offsetX, offsetY);
         sprite.position = Tyra::Vec2(0, 0);
 
         sprites.emplace_back(sprite);
+        spriteNames[name] = sprites.size() - 1;
     }
 }
 
-Tyra::Sprite* TextureAtlas::getSprite(size_t index) {
+Tyra::Sprite* TextureAtlas::getSprite(const std::string& name) {
 
-    if (index < sprites.size()) {
-        return &sprites[index];
+    if (spriteNames.find(name) != spriteNames.end()) {
+        return &sprites[spriteNames[name]];
     }
 
     return nullptr;
 }
 
-void TextureAtlas::drawSprite(size_t index, const Tyra::Color& color) {
+void TextureAtlas::renderSprite(const std::string& name) {
 
-    sprites[index].color = color;
+    Tyra::Sprite* sprite = getSprite(name);
 
-    engine->renderer.renderer2D.render(sprites[index]);
+    if (sprite) {
+        engine->renderer.renderer2D.render(*sprite);
+    }
 }
+void TextureAtlas::renderSprite(const std::string& name, const Tyra::Color& color) {
 
+    Tyra::Sprite* sprite = getSprite(name);
+
+    if (sprite) {
+        sprite->color = color;
+        engine->renderer.renderer2D.render(*sprite);
+    }
+}
 
 TextureAtlas::~TextureAtlas() {
 
-    engine->renderer.getTextureRepository().freeBySprite(atlasTexture);
+    for (auto& sprite : sprites) {
+        engine->renderer.getTextureRepository().freeBySprite(sprite);
+    }
+
+    engine->renderer.getTextureRepository().freeBySprite(atlas);
+
+    TYRA_LOG("Release: Texture Atlas Component");
 }

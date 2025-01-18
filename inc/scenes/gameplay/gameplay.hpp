@@ -1,27 +1,34 @@
 #pragma once
 
 #include <tyra>
+#include <iostream>
 
+#include "scene.hpp"
 #include "player/player.hpp"
-#include "utils/staticModel.hpp"
-#include "utils/textureAtlas.hpp"
+#include "components/staticModel.hpp"
+#include "components/textureAtlas.hpp"
 
-class Gameplay {
+class SceneManager;
+
+class Gameplay : public Scene {
 
     public:
 
-        Gameplay(Tyra::Engine* t_engine);
-        ~Gameplay();
+        explicit Gameplay(Tyra::Engine* t_engine, SceneManager& sm);
 
-        void init();
-        void update();
+        ~Gameplay() override;
+
+        void init() override;
+        void update() override;
+        void render() override;
 
     private:
 
         Tyra::Engine* engine;
 
         Player player;
-
         Model map;
-        
+
+        SceneManager& sceneManager;
+
 };

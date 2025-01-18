@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "utils/staticModel.hpp"
+#include "components/staticModel.hpp"
 
 enum class ItemType {
     Gun,
@@ -45,7 +45,7 @@ class Gun : public Item {
         Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const char modelPath[], const char texturePath[]);
         ~Gun();
 
-        void draw(Tyra::Vec4 cameraPosition);
+        void render(Tyra::Vec4 cameraPosition);
 
         int getBulletsInGun() {
             return bulletsGun;

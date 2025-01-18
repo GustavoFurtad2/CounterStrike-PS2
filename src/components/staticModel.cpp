@@ -1,6 +1,6 @@
 #include <cmath>
-#include "utils/staticModel.hpp"
 
+#include "components/staticModel.hpp"
 
 Model::Model(Tyra::Engine* t_engine, const char modelPath[], const char texturePath[], float scale) : engine(t_engine) {
 
@@ -20,10 +20,12 @@ Model::Model(Tyra::Engine* t_engine, const char modelPath[], const char textureP
 }
 
 Model::~Model() {
+
     engine->renderer.getTextureRepository().freeByMesh(mesh.get());
+    TYRA_LOG("Release: Static Model Component");
 }
 
-void Model::draw() {
+void Model::render() {
 
     engine->renderer.renderer3D.usePipeline(stapip);
 

@@ -9,7 +9,7 @@ class Model {
         Model(Tyra::Engine* t_engine, const char modelPath[], const char texturePath[], float scale);
         ~Model();
 
-        void draw();
+        void render();
 
         Tyra::StaticMesh* getMesh() {
             return mesh.get();
@@ -28,8 +28,5 @@ class Model {
         Tyra::StaPipOptions renderOptions;
 
         std::unique_ptr<Tyra::StaticMesh> mesh;
-
-
-
 
 };

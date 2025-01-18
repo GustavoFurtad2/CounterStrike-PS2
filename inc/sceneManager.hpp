@@ -1,68 +1,31 @@
 #pragma once
 
-#include <tyra>
+#include <memory>
+#include "scene.hpp"
 
-#include "scenes.hpp"
+class SceneManager {
 
-#include "scenes/menu/menu.hpp"
-#include "scenes/gameplay/gameplay.hpp"
+    public:
 
-namespace Cs::SceneManager {
+        SceneManager() {}
 
-    Scene currentScene;
+        void setScene(std::unique_ptr<Scene> scene) {
+            currentScene = std::move(scene);
 
-    std::unique_ptr<Menu> menu;
-    std::unique_ptr<Gameplay> gameplay;
+            currentScene->init();
+        }
 
+        void handleScene() {
 
-    void setScene(Tyra::Engine* engine, Scene newScene) {
-
-        currentScene = newScene;
-
-        switch (currentScene) {
-
-            case Scene::MENU:
-
-                TYRA_LOG("MENUUUUUUUUUU");
-
-                if (!menu) {
-
-                    menu = std::make_unique<Menu>(engine);
-                    menu->init();
-                    menu->update();
-                }
+            if (currentScene) {
                 
-                break;
-            case Scene::GAMEPLAY:
+                currentScene->update();
+                currentScene->render();
+            }
+        }
 
-                TYRA_LOG("GAMPLAYUUUUUUUUUUUUUUU");
+    private:
 
-                if (!gameplay) {
+        std::unique_ptr<Scene> currentScene;
 
-                    gameplay = std::make_unique<Gameplay>(engine);
-                    gameplay->init();
-                    gameplay->update();
-                }
-                
-                break;
-        };
-    }
-
-    void updateCurrentScene() {
-
-        switch (currentScene) {
-
-            case Scene::MENU:
-
-                menu->update();
-
-                break;
-            case Scene::GAMEPLAY:
-
-                gameplay->update();
-
-                break;
-        };
-    }
-
-}
+};

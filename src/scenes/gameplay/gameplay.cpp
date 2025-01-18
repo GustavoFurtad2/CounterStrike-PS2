@@ -1,11 +1,16 @@
+#include "sceneManager.hpp"
 #include "scenes/gameplay/gameplay.hpp"
 
-Gameplay::Gameplay(Tyra::Engine* t_engine)
+Gameplay::Gameplay(Tyra::Engine* t_engine, SceneManager& sm)
   : engine(t_engine),
     player(t_engine),
+    sceneManager(sm),
     map(t_engine, "assets/gameplay/maps/de_dust2/De_dust2.obj", "assets/gameplay/maps/de_dust2/", 200.0f) {}
-    
-Gameplay::~Gameplay() {}
+
+Gameplay::~Gameplay() {
+
+    TYRA_LOG("Release: Gameplay Scene");
+}
 
 void Gameplay::init() {
 
@@ -14,16 +19,19 @@ void Gameplay::init() {
 
 void Gameplay::update() {
 
+    player.update();
+}
+
+void Gameplay::render() {
+
     auto& renderer = engine->renderer;
 
     renderer.beginFrame(player.getCameraInfo());
 
-    player.update();
+    map.render();
 
-    map.draw();
+    player.renderGun();
+    player.renderHUD();
 
-    player.drawGun();
-    player.drawHUD();
-
-    renderer.endFrame();
+    renderer.endFrame(); 
 }

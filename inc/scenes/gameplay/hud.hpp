@@ -4,8 +4,8 @@
 #include <string>
 #include <chrono>
 
-#include "utils/image.hpp"
-#include "utils/textureAtlas.hpp"
+#include "components/image.hpp"
+#include "components/textureAtlas.hpp"
 
 class HUD {
 
@@ -14,15 +14,15 @@ class HUD {
         HUD(Tyra::Engine* t_engine);
         ~HUD();
 
-        void draw(int bulletsGun, int bulletsPerCartridge, int cartridges);
+        void render(int bulletsGun, int bulletsPerCartridge, int cartridges);
 
     private:
 
         void displayNumber(unsigned int number, Tyra::Vec2 position, Tyra::Color color);
 
         void transitionColor(Tyra::Color& currentColor, const Tyra::Color& targetColor, float speed);
-        void drawMoney();
-        void drawTimer();
+        void renderMoney();
+        void renderTimer();
 
         int money = 800;
         float health = 100;
@@ -34,16 +34,7 @@ class HUD {
 
         Tyra::Engine* engine;
 
-        TextureAtlas hud7;
+        TextureAtlas hudAtlas;
         Image radar;
-
-        Tyra::Sprite* cross;
-        Tyra::Sprite* suitEmpty;
-        Tyra::Sprite* stopwatch;
-        Tyra::Sprite* minus;
-        Tyra::Sprite* ammo;
-        Tyra::Sprite* bar;
-        Tyra::Sprite* dollar;
-        Tyra::Sprite* buyzone;
     
 };

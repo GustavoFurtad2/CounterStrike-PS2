@@ -14,8 +14,8 @@ class Player {
         ~Player();
 
         void update();
-        void drawHUD();
-        void drawGun();
+        void renderHUD();
+        void renderGun();
 
         Tyra::CameraInfo3D getCameraInfo() {
             return camera.getCameraInfo();

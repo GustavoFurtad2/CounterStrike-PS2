@@ -9,12 +9,12 @@ void Player::update() {
     camera.update();
 }
 
-void Player::drawHUD() {
+void Player::renderHUD() {
 
-    hud.draw(usp.getBulletsInGun(), usp.getBulletsPerCartridge(), usp.getCartridges());
+    hud.render(usp.getBulletsInGun(), usp.getBulletsPerCartridge(), usp.getCartridges());
 }
 
-void Player::drawGun() {
+void Player::renderGun() {
 
-    usp.draw(Tyra::Vec4(getCameraInfo().position->x - 125.0f, getCameraInfo().position->y - 25.0f, getCameraInfo().position->z - 100.0f, 1));
+    usp.render(Tyra::Vec4(getCameraInfo().position->x - 125.0f, getCameraInfo().position->y - 25.0f, getCameraInfo().position->z - 100.0f, 1));
 }

@@ -1,6 +1,6 @@
-#include "utils/image.hpp"
+#include "components/image.hpp"
 
-Image::Image(Tyra::Engine* t_engine, const char path[], Tyra::Vec2 position, Tyra::Vec2 size) : engine(t_engine) {
+Image::Image(Tyra::Engine* t_engine, const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size) : engine(t_engine) {
 
     image.mode = Tyra::SpriteMode::MODE_STRETCH;
 
@@ -9,7 +9,7 @@ Image::Image(Tyra::Engine* t_engine, const char path[], Tyra::Vec2 position, Tyr
 
     auto& textureRepository = engine->renderer.getTextureRepository();
 
-    auto filepath = Tyra::FileUtils::fromCwd(path);
+    auto filepath = Tyra::FileUtils::fromCwd(imagePath);
 
     auto* texture = textureRepository.add(filepath);
 
@@ -20,14 +20,15 @@ Image::Image(Tyra::Engine* t_engine, const char path[], Tyra::Vec2 position, Tyr
 Image::~Image() {
 
     engine->renderer.getTextureRepository().freeBySprite(image);
+    TYRA_LOG("Release: Image Component");
 }
 
-void Image::draw() {
+void Image::render() {
 
     engine->renderer.renderer2D.render(image);
 }
 
-void Image::draw(Tyra::Color color) {
+void Image::render(Tyra::Color color) {
 
     image.color = color;
 
