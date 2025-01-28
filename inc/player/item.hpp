@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 
+#include "utils.hpp"
 #include "player/camera.hpp"
 #include "components/staticModel.hpp"
 #include "components/animatedModel.hpp"
@@ -51,7 +52,7 @@ class Gun : public Item {
         Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
         ~Gun();
 
-        void render(Camera playerCamera, Tyra::Vec4 gunOffset);
+        void render(const Camera &playerCamera, const Tyra::Vec4 &gunPositionOffset, const Tyra::Vec4 &gunAngleOffset);
 
         int getBulletsInGun() {
             return bulletsGun;
@@ -66,6 +67,10 @@ class Gun : public Item {
         } 
 
     private:
+
+        Tyra::Vec4 calculateRotationFromDirection(const Tyra::Vec4 &direction);
+        Tyra::Vec4 getOffsetInDirection(const Tyra::Vec4& direction, const Tyra::Vec4& gunOffset);
+        Tyra::Vec4 crossProduct(const Tyra::Vec4& a, const Tyra::Vec4& b);
 
         int baseDamage;
 

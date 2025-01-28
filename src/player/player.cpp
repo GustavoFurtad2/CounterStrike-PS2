@@ -38,5 +38,5 @@ void Player::renderHUD() {
 
 void Player::renderGun() {
 
-    ak47.render(camera, Tyra::Vec4(getCameraInfo().position->x - 37.0f, getCameraInfo().position->y - 4.0f, getCameraInfo().position->z - 100.0f, 1));
+    ak47.render(camera, Tyra::Vec4(80.0f, 45.0f, 30.0f), Tyra::Vec4(degreesToRadians(90), 0.0f, 0.0f));
 }
