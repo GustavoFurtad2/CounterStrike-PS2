@@ -20,6 +20,11 @@ namespace Tyra {
                 return Tyra::CameraInfo3D(&position, &lookAt);
             }
 
+            float getLookAtHeight() {
+
+                return lookAtHeight;
+            }
+
             void update();
 
         private:
@@ -32,3 +37,4 @@ namespace Tyra {
 
     };
 } 
+

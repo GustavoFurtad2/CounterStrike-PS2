@@ -6,7 +6,7 @@ namespace Tyra {
 
     Camera::Camera(Tyra::Pad* t_pad)
       : lookAt(0.0F),
-        position(-944.0F, 700.0F, -3678.0F),
+        position(-944.0F, 900.0F, -3678.0F),
         pad(t_pad),
         circleRotation(-5.0F),
         circleLength(30.0F),

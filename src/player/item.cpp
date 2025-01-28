@@ -1,12 +1,24 @@
 #include "player/item.hpp"
 
-Gun::Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const char modelPath[], const char texturePath[])
-  : Item(t_engine, name, ItemType::Gun, modelPath, texturePath, 10.0f), baseDamage(baseDamage) {}
+Gun::Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels)
+  : Item(t_engine, name, ItemType::Gun, gunModels), baseDamage(baseDamage) {}
 
-Gun::~Gun() {}
+Gun::~Gun() {
 
-void Gun::render(Tyra::Vec4 cameraPosition) {
+    for (auto *model : itemModels) {
+        delete model;
+    }
 
-    itemModel.setPosition(cameraPosition);
-    itemModel.render();
+    itemModels.clear();
+
+    TYRA_LOG("Release: Gun " + name);
+}
+
+void Gun::render(Tyra::Camera playerCamera, Tyra::Vec4 gunOffset) {
+
+    for (auto* model : itemModels) {
+        
+        model->setPosition(gunOffset);        
+        model->render();
+    }
 }

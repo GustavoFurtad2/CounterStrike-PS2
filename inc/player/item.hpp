@@ -2,9 +2,13 @@
 
 #include <tyra>
 
+#include <cmath>
 #include <string>
+#include <iostream>
 
+#include "player/camera.hpp"
 #include "components/staticModel.hpp"
+#include "components/animatedModel.hpp"
 
 enum class ItemType {
     Gun,
@@ -17,8 +21,8 @@ class Item {
 
     public:
 
-        Item(Tyra::Engine* t_engine, const std::string& name, ItemType type, const char modelPath[], const char texturePath[], float scale)
-            : name(name), type(type), itemModel(t_engine, modelPath, texturePath, scale) {};
+        Item(Tyra::Engine* t_engine, const std::string& name, ItemType type, const std::vector<AnimatedModel*> itemModels)
+            : engine(t_engine), name(name), type(type), itemModels(itemModels) {};
         virtual ~Item() = default;
 
         std::string getName() const {
@@ -31,10 +35,12 @@ class Item {
 
     protected:
 
+        Tyra::Engine* engine;
+
         std::string name;
         ItemType type;
 
-        Model itemModel;
+        std::vector<AnimatedModel*> itemModels;
 
 };
 
@@ -42,10 +48,10 @@ class Gun : public Item {
 
     public:
 
-        Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const char modelPath[], const char texturePath[]);
+        Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
         ~Gun();
 
-        void render(Tyra::Vec4 cameraPosition);
+        void render(Tyra::Camera playerCamera, Tyra::Vec4 gunOffset);
 
         int getBulletsInGun() {
             return bulletsGun;
@@ -57,7 +63,7 @@ class Gun : public Item {
 
         int getCartridges() {
             return cartridges;
-        }
+        } 
 
     private:
 

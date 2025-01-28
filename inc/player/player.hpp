@@ -25,7 +25,8 @@ class Player {
 
         HUD hud;
 
-        Gun usp;
+        // Gun usp;
+        Gun ak47;
 
         Tyra::Camera camera;
 
