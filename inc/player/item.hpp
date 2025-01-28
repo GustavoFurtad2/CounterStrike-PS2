@@ -51,7 +51,7 @@ class Gun : public Item {
         Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
         ~Gun();
 
-        void render(Tyra::Camera playerCamera, Tyra::Vec4 gunOffset);
+        void render(Camera playerCamera, Tyra::Vec4 gunOffset);
 
         int getBulletsInGun() {
             return bulletsGun;

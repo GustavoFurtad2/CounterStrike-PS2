@@ -28,6 +28,6 @@ class Player {
         // Gun usp;
         Gun ak47;
 
-        Tyra::Camera camera;
+        Camera camera;
 
 };

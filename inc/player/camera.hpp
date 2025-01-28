@@ -2,39 +2,33 @@
 
 #include <tyra>
 
-namespace Tyra {
+#include "utils.hpp"
 
-    class Camera {
+class Camera {
 
-        public:
+    public:
 
-            Camera(Tyra::Pad* pad);
-            ~Camera();
+        Camera(Tyra::Pad* pad);
+        ~Camera();
 
-            Tyra::Vec4 lookAt;
-            Tyra::Vec4 position;
+        Tyra::Vec4 lookAt;
+        Tyra::Vec4 position;
 
-            Tyra::Vec4 unitCircle;
+        Tyra::Vec4 unitCircle;
 
-            Tyra::CameraInfo3D getCameraInfo() {
-                return Tyra::CameraInfo3D(&position, &lookAt);
-            }
+        Tyra::CameraInfo3D getCameraInfo() {
+            return Tyra::CameraInfo3D(&position, &lookAt);
+        }
 
-            float getLookAtHeight() {
+        void update();
 
-                return lookAtHeight;
-            }
+    private:
 
-            void update();
+        void rotate();
+        void updatePosition();
+        void updateLookAt();
 
-        private:
+        Tyra::Pad* pad;
 
-            void updatePosition();
-            void updateLookAt();
-
-            Tyra::Pad* pad;
-            float circleRotation, circleLength, speed, lookAtHeight;
-
-    };
-} 
-
+        float circleRotation, circleLength, pitch, yaw, sensitivity;
+};

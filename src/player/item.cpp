@@ -14,7 +14,7 @@ Gun::~Gun() {
     TYRA_LOG("Release: Gun " + name);
 }
 
-void Gun::render(Tyra::Camera playerCamera, Tyra::Vec4 gunOffset) {
+void Gun::render(Camera playerCamera, Tyra::Vec4 gunOffset) {
 
     for (auto* model : itemModels) {
         
