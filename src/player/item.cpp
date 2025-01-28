@@ -3,9 +3,7 @@
 Gun::Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels)
   : Item(t_engine, name, ItemType::Gun, gunModels), baseDamage(baseDamage) {
 
-    for (auto *model : itemModels) {
-        model->setAngle(Tyra::Vec4(-1.398f, 0.0f, -1.659f));
-    }
+    setAnimationIdle();
 }
 
 Gun::~Gun() {
@@ -17,6 +15,21 @@ Gun::~Gun() {
     itemModels.clear();
 
     TYRA_LOG("Release: Gun " + name);
+}
+
+void Gun::update() {
+
+    if (engine->pad.getPressed().R2 && !isShooting) {
+
+        isShooting = true;
+        setAnimationShoot();
+    }
+
+    if (itemModels[0]->animationFinished && isShooting) {
+
+        setAnimationIdle();
+        isShooting = false;
+    }
 }
 
 void Gun::render(const Camera& playerCamera, const Tyra::Vec4 &gunPositionOffset, const Tyra::Vec4 &gunAngleOffset) {
@@ -37,6 +50,24 @@ void Gun::render(const Camera& playerCamera, const Tyra::Vec4 &gunPositionOffset
         model->setAngle(rotationAngles); 
         model->render();
     }
+}
+
+void Gun::setAnimationIdle() {
+
+    for (auto model : itemModels) {
+        model->getMesh()->animation.setSequence(idleAnimationKeyframe);
+    }
+
+    currentAnimation = AnimationType::Idle;
+}
+
+void Gun::setAnimationShoot() {
+
+    for (auto model : itemModels) {
+        model->getMesh()->animation.setSequence(shootAnimationKeyframe);
+    }
+
+    currentAnimation = AnimationType::Shoot;
 }
 
 Tyra::Vec4 Gun::calculateRotationFromDirection(const Tyra::Vec4& direction) {

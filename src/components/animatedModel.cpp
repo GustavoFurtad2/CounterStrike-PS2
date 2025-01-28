@@ -37,8 +37,5 @@ void AnimatedModel::render() {
 }
 
 void AnimatedModel::animationCallback(const Tyra::AnimationSequenceCallback& callback) {
-
-    if (callback == Tyra::AnimationSequenceCallback_Loop) {
-        //TYRA_LOG("Animation sequence is starting from beginning!");
-    }
+    animationFinished = callback == Tyra::AnimationSequenceCallback_Loop;
 }

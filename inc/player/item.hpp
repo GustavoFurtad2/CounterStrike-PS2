@@ -18,6 +18,11 @@ enum class ItemType {
     Shield
 };
 
+enum class AnimationType {
+    Idle,
+    Shoot
+};
+
 class Item {
 
     public:
@@ -52,6 +57,7 @@ class Gun : public Item {
         Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
         ~Gun();
 
+        void update();
         void render(const Camera &playerCamera, const Tyra::Vec4 &gunPositionOffset, const Tyra::Vec4 &gunAngleOffset);
 
         int getBulletsInGun() {
@@ -71,6 +77,18 @@ class Gun : public Item {
         Tyra::Vec4 calculateRotationFromDirection(const Tyra::Vec4 &direction);
         Tyra::Vec4 getOffsetInDirection(const Tyra::Vec4& direction, const Tyra::Vec4& gunOffset);
         Tyra::Vec4 crossProduct(const Tyra::Vec4& a, const Tyra::Vec4& b);
+
+        bool isShooting = false;
+        
+        void setAnimationIdle();
+        void setAnimationShoot();
+
+        unsigned int currentFrame = 0;
+
+        const std::vector<unsigned int>idleAnimationKeyframe = {0};
+        const std::vector<unsigned int>shootAnimationKeyframe = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+
+        AnimationType currentAnimation = AnimationType::Idle;
 
         int baseDamage;
 

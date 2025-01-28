@@ -11,6 +11,8 @@ class AnimatedModel {
 
         void render();
 
+        bool animationFinished = false;
+
         Tyra::DynamicMesh* getMesh() {
             return mesh.get();
         };

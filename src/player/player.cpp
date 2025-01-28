@@ -19,7 +19,6 @@ Player::Player(Tyra::Engine* t_engine)
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/handle.md2", "assets/gameplay/guns/ak47/", 50.0f),           
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/magazine.md2", "assets/gameplay/guns/ak47/", 50.0f)
     }) {}
-    // usp(t_engine, "usp", 30, "assets/gameplay/guns/usp/usp.obj", "assets/gameplay/guns/usp/") {}
 
 Player::~Player() {
 
@@ -38,5 +37,6 @@ void Player::renderHUD() {
 
 void Player::renderGun() {
 
+    ak47.update();
     ak47.render(camera, Tyra::Vec4(80.0f, 45.0f, 30.0f), Tyra::Vec4(degreesToRadians(90), 0.0f, 0.0f));
 }
