@@ -23,6 +23,8 @@ class Camera {
 
     private:
 
+        float speed = 40.0f;
+
         void rotate();
         void updatePosition();
         void updateLookAt();
