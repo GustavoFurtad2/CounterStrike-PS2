@@ -50,7 +50,12 @@ void Gun::update(const Camera &playerCamera) {
 
 Tyra::Vec4 Gun::calculateBobbingOffsetInDirection(const Camera &playerCamera) {
 
-    if (gunSwinging && playerCamera.getIsMoving()) {
+    if (isShooting) {
+
+        bobbingOffset.z = lerp(bobbingOffset.z, 0.0f, 0.2);
+        return Tyra::Vec4(bobbingOffset.x, bobbingOffset.y, bobbingOffset.z);
+    }
+    else if (gunSwinging && playerCamera.getIsMoving()) {
 
         std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
         std::chrono::milliseconds elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - timerSincePlayerIsWalking);
