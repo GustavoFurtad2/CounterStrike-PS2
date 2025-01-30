@@ -3,6 +3,7 @@
 #include <tyra>
 
 #include <cmath>
+#include <chrono>
 #include <string>
 #include <iostream>
 
@@ -57,7 +58,7 @@ class Gun : public Item {
         Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
         ~Gun();
 
-        void update();
+        void update(const Camera &playerCamera);
         void render(const Camera &playerCamera, const Tyra::Vec4 &gunPositionOffset, const Tyra::Vec4 &gunAngleOffset);
 
         int getBulletsInGun() {
@@ -74,9 +75,16 @@ class Gun : public Item {
 
     private:
 
+        std::chrono::high_resolution_clock::time_point timerSincePlayerIsWalking;
+
         Tyra::Vec4 calculateRotationFromDirection(const Tyra::Vec4 &direction);
         Tyra::Vec4 getOffsetInDirection(const Tyra::Vec4& direction, const Tyra::Vec4& gunOffset);
+        Tyra::Vec4 calculateBobbingOffsetInDirection(const Camera &playerCamera);
         Tyra::Vec4 crossProduct(const Tyra::Vec4& a, const Tyra::Vec4& b);
+
+        Tyra::Vec4 cameraDirection, rotationAngles, position, bobbingOffset;
+
+        bool gunSwinging = false;
 
         bool isShooting = false;
         

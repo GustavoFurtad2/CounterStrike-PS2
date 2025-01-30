@@ -17,7 +17,23 @@ Gun::~Gun() {
     TYRA_LOG("Release: Gun " + name);
 }
 
-void Gun::update() {
+void Gun::update(const Camera &playerCamera) {
+
+
+    if (!gunSwinging && playerCamera.getIsMoving()) {
+
+        gunSwinging = true;
+
+        timerSincePlayerIsWalking = std::chrono::high_resolution_clock::now();
+    }
+    else if (gunSwinging && !playerCamera.getIsMoving()) {
+
+        gunSwinging = false;
+    }
+    else {
+
+        bobbingOffset.z = lerp(bobbingOffset.z, 0.0f, 0.1);
+    }
 
     if (engine->pad.getPressed().R2 && !isShooting) {
 
@@ -32,14 +48,31 @@ void Gun::update() {
     }
 }
 
-void Gun::render(const Camera& playerCamera, const Tyra::Vec4 &gunPositionOffset, const Tyra::Vec4 &gunAngleOffset) {
+Tyra::Vec4 Gun::calculateBobbingOffsetInDirection(const Camera &playerCamera) {
 
-    Tyra::Vec4 cameraDirection = (playerCamera.lookAt - playerCamera.position).getNormalized();
+    if (gunSwinging && playerCamera.getIsMoving()) {
+
+        std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
+        std::chrono::milliseconds elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - timerSincePlayerIsWalking);
+
+        bobbingOffset.z = lerp(bobbingOffset.z, ((static_cast<int>(elapsed.count() / 1000)) % 2 == 1) ? -200.0f : 10.0f, 0.05);
+
+        return Tyra::Vec4(bobbingOffset.x, bobbingOffset.y, bobbingOffset.z);
+    }
+
+    return Tyra::Vec4(0.0f, 0.0f, 0.0f);
+}
+
+void Gun::render(const Camera &playerCamera, const Tyra::Vec4 &gunPositionOffset, const Tyra::Vec4 &gunAngleOffset) {
+
+    cameraDirection = (playerCamera.lookAt - playerCamera.position).getNormalized();
+
+    calculateBobbingOffsetInDirection(playerCamera);
 
     for (auto model : itemModels) {
 
-        Tyra::Vec4 rotationAngles = calculateRotationFromDirection(cameraDirection);
-        Tyra::Vec4 position = playerCamera.position + getOffsetInDirection(cameraDirection, gunPositionOffset);
+        rotationAngles = calculateRotationFromDirection(cameraDirection);
+        position = playerCamera.position + getOffsetInDirection(cameraDirection, gunPositionOffset + bobbingOffset);
 
         rotationAngles.x = rotationAngles.x - gunAngleOffset.x;
         rotationAngles.y = rotationAngles.y - gunAngleOffset.y;

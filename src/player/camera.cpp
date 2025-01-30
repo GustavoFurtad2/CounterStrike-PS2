@@ -81,6 +81,8 @@ void Camera::updatePosition() {
     }
 
     position.y = 40.0F;
+
+    isMoving = leftJoy.v <= 100 || leftJoy.v >= 200 || leftJoy.h <= 100 || leftJoy.h >= 200;
 }
 
 void Camera::updateLookAt() {
