@@ -18,11 +18,12 @@ Player::Player(Tyra::Engine* t_engine)
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/reticle.md2", "assets/gameplay/guns/ak47/", 50.0f),         
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/handle.md2", "assets/gameplay/guns/ak47/", 50.0f),           
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/magazine.md2", "assets/gameplay/guns/ak47/", 50.0f)
-    }) {}
+    }) {
+
+    equippedGun = &ak47;
+}
 
 Player::~Player() {
-
-    
 }
 
 void Player::update() {
@@ -32,11 +33,11 @@ void Player::update() {
 
 void Player::renderHUD() {
 
-    hud.render(ak47.getBulletsInGun(), ak47.getBulletsPerCartridge(), ak47.getCartridges());
+    hud.render(equippedGun->getBulletsInGun(), equippedGun->getBulletsPerCartridge(), equippedGun->getCartridges());
 }
 
 void Player::renderGun() {
 
-    ak47.update(camera);
-    ak47.render(camera, Tyra::Vec4(80.0f, 45.0f, 30.0f), Tyra::Vec4(degreesToRadians(90), 0.0f, 0.0f));
+    equippedGun->update(camera);
+    equippedGun->render(camera, Tyra::Vec4(80.0f, 45.0f, 30.0f), Tyra::Vec4(degreesToRadians(90), 0.0f, 0.0f));
 }

@@ -2,7 +2,10 @@
 
 HUD::HUD(Tyra::Engine* t_engine)
   : engine(t_engine),
-    hudAtlas(t_engine, "assets/gameplay/hud/textures/640hud7.png", "assets/gameplay/hud/config/hud.txt", Tyra::Vec2(256, 256)),
+    hudAtlas(t_engine, "assets/gameplay/hud/textures/640hud7.png", "assets/gameplay/hud/config/hud7.txt", Tyra::Vec2(256, 256)),
+    gunIconAtlas1(t_engine, "assets/gameplay/hud/textures/640hud1.png", "assets/gameplay/hud/config/hud1.txt", Tyra::Vec2(256, 256)),
+    gunIconAtlas10(t_engine, "assets/gameplay/hud/textures/640hud10.png", "assets/gameplay/hud/config/hud10.txt", Tyra::Vec2(256, 256)),
+
     radar(t_engine, "assets/gameplay/hud/textures/radar.png", Tyra::Vec2(0, 0), Tyra::Vec2(128, 128)) {
 
     hudAtlas.getSprite("cross")->position = Tyra::Vec2(10, 411);     
@@ -12,6 +15,10 @@ HUD::HUD(Tyra::Engine* t_engine)
     hudAtlas.getSprite("dollar")->position = Tyra::Vec2(394, 373);
     hudAtlas.getSprite("ammo")->position = Tyra::Vec2(474, 407);
     hudAtlas.getSprite("buyzone")->position = Tyra::Vec2(10, 198);
+
+    gunIconAtlas10.getSprite("ak47Icon")->position = Tyra::Vec2(340, 215);
+    gunIconAtlas1.getSprite("uspIcon")->position = Tyra::Vec2(340, 265);
+    gunIconAtlas10.getSprite("knifeIcon")->position = Tyra::Vec2(340, 315);
 }
 
 HUD::~HUD() {
@@ -89,6 +96,16 @@ void HUD::renderTimer() {
     }
 }
 
+void HUD::renderGunIcons() {
+
+    if (gunIconColor.a > 0 ) {
+        gunIconAtlas10.renderSprite("ak47Icon", gunIconColor);
+        gunIconAtlas1.renderSprite("uspIcon", gunIconColor);
+        gunIconAtlas10.renderSprite("knifeIcon", gunIconColor);
+        gunIconColor.a = lerp(gunIconColor.a, 0, 0.005);
+    }
+}
+
 void HUD::render(int bulletsGun, int bulletsPerCartridge, int cartridges) {
 
     hudAtlas.renderSprite("cross", Tyra::Color(252, 140, 0, 48));
@@ -105,6 +122,7 @@ void HUD::render(int bulletsGun, int bulletsPerCartridge, int cartridges) {
 
     renderMoney();
     renderTimer();
+    renderGunIcons();
 
     radar.render(Tyra::Color(255, 255, 255, 48));
 }

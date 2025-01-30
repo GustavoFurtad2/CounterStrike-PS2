@@ -26,8 +26,8 @@ class Player {
 
         HUD hud;
 
-        // Gun usp;
         Gun ak47;
+        Gun *equippedGun;
 
         Camera camera;
 

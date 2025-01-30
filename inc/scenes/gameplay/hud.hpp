@@ -4,6 +4,7 @@
 #include <string>
 #include <chrono>
 
+#include "utils.hpp"
 #include "components/image.hpp"
 #include "components/textureAtlas.hpp"
 
@@ -23,6 +24,7 @@ class HUD {
         void transitionColor(Tyra::Color& currentColor, const Tyra::Color& targetColor, float speed);
         void renderMoney();
         void renderTimer();
+        void renderGunIcons();
 
         int money = 800;
         float health = 100;
@@ -35,6 +37,11 @@ class HUD {
         Tyra::Engine* engine;
 
         TextureAtlas hudAtlas;
+        TextureAtlas gunIconAtlas1;
+        TextureAtlas gunIconAtlas10;
+
+        Tyra::Color gunIconColor = Tyra::Color(252, 140, 0, 48);
+
         Image radar;
     
 };
