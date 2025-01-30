@@ -3,6 +3,18 @@
 Player::Player(Tyra::Engine* t_engine) 
   : hud(t_engine),
     camera(&t_engine->pad), 
+    usp(t_engine, "usp", 30, {
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/left_arm.md2", "assets/gameplay/guns/usp/", 50.0f),        
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/left_finger.md2", "assets/gameplay/guns/usp/", 50.0f),  
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/left_glove.md2", "assets/gameplay/guns/usp/", 50.0f),    
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/right_arm.md2", "assets/gameplay/guns/usp/", 50.0f),      
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/right_finger.md2", "assets/gameplay/guns/usp/", 50.0f),
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/right_glove.md2", "assets/gameplay/guns/usp/", 50.0f),
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/slide.md2", "assets/gameplay/guns/usp/", 50.0f),    
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/handle.md2", "assets/gameplay/guns/usp/", 50.0f),      
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/magazine.md2", "assets/gameplay/guns/usp/", 50.0f),
+        new AnimatedModel(t_engine, "assets/gameplay/guns/usp/silencer.md2", "assets/gameplay/guns/usp/", 50.0f),
+    }),
     ak47(t_engine, "ak47", 30, {
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/left_arm.md2", "assets/gameplay/guns/ak47/", 50.0f),        
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/left_finger.md2", "assets/gameplay/guns/ak47/", 50.0f),  
@@ -20,7 +32,9 @@ Player::Player(Tyra::Engine* t_engine)
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/magazine.md2", "assets/gameplay/guns/ak47/", 50.0f)
     }) {
 
-    equippedGun = &ak47;
+    usp.isShootable = false;
+    equippedGun = &usp;
+
 }
 
 Player::~Player() {

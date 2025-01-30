@@ -21,7 +21,7 @@ enum class ItemType {
 
 enum class AnimationType {
     Idle,
-    Shoot
+    Shoot,
 };
 
 class Item {
@@ -71,7 +71,9 @@ class Gun : public Item {
 
         int getCartridges() {
             return cartridges;
-        } 
+        }
+
+        bool isShootable = false;
 
     private:
 
@@ -87,14 +89,14 @@ class Gun : public Item {
         bool gunSwinging = false;
 
         bool isShooting = false;
+
+        const std::vector<unsigned int>idleAnimationKeyframe = {0};
+        const std::vector<unsigned int>shootAnimationKeyframe = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
         
         void setAnimationIdle();
         void setAnimationShoot();
 
         unsigned int currentFrame = 0;
-
-        const std::vector<unsigned int>idleAnimationKeyframe = {0};
-        const std::vector<unsigned int>shootAnimationKeyframe = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
 
         AnimationType currentAnimation = AnimationType::Idle;
 

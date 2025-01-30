@@ -35,15 +35,15 @@ void Gun::update(const Camera &playerCamera) {
         bobbingOffset.z = lerp(bobbingOffset.z, 0.0f, 0.1);
     }
 
-    if (engine->pad.getPressed().R2 && !isShooting) {
+    if (engine->pad.getPressed().R2 && !isShooting && isShootable) {
 
         isShooting = true;
         setAnimationShoot();
     }
 
-    if (itemModels[0]->animationFinished && isShooting) {
-
+    if (itemModels[0]->animationFinished) {
         setAnimationIdle();
+
         isShooting = false;
     }
 }

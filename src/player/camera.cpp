@@ -4,7 +4,7 @@
 
 Camera::Camera(Tyra::Pad* t_pad)
   : lookAt(0.0f),
-    position(0.0f, 40.0f, 0.0f),
+    position(-2767.37, 30.0f, -8166.36),
     pad(t_pad),
     circleRotation(0.0f),
     circleLength(30.0f),
@@ -80,7 +80,7 @@ void Camera::updatePosition() {
         position += right * speed;
     }
 
-    position.y = 40.0F;
+    position.y = 30.0F;
 
     isMoving = leftJoy.v <= 100 || leftJoy.v >= 200 || leftJoy.h <= 100 || leftJoy.h >= 200;
 }
