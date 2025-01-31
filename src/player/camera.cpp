@@ -1,6 +1,5 @@
 #include "player/camera.hpp"
-
-#include <algorithm>
+#include "utils.hpp"
 
 Camera::Camera(Tyra::Pad* t_pad)
   : lookAt(0.0f),
@@ -52,15 +51,15 @@ void Camera::updatePosition() {
     const auto& leftJoy = pad->getLeftJoyPad();
 
     Tyra::Vec4 forward(
-        Tyra::Math::cos(degreesToRadians(yaw)),
+        Tyra::Math::cos(Cs::Utils::degreesToRadians(yaw)),
         0.0F,
-        Tyra::Math::sin(degreesToRadians(yaw))
+        Tyra::Math::sin(Cs::Utils::degreesToRadians(yaw))
     );
 
     Tyra::Vec4 right(
-        Tyra::Math::cos(degreesToRadians(yaw + 90.0F)),
+        Tyra::Math::cos(Cs::Utils::degreesToRadians(yaw + 90.0F)),
         0.0F,
-        Tyra::Math::sin(degreesToRadians(yaw + 90.0F))
+        Tyra::Math::sin(Cs::Utils::degreesToRadians(yaw + 90.0F))
     );
 
     forward.normalize();
@@ -87,9 +86,9 @@ void Camera::updatePosition() {
 
 void Camera::updateLookAt() {
 
-    lookAt.x = Tyra::Math::cos(degreesToRadians(yaw)) * Tyra::Math::cos(degreesToRadians(pitch));
-    lookAt.y = Tyra::Math::sin(degreesToRadians(pitch));
-    lookAt.z = Tyra::Math::sin(degreesToRadians(yaw)) * Tyra::Math::cos(degreesToRadians(pitch));
+    lookAt.x = Tyra::Math::cos(Cs::Utils::degreesToRadians(yaw)) * Tyra::Math::cos(Cs::Utils::degreesToRadians(pitch));
+    lookAt.y = Tyra::Math::sin(Cs::Utils::degreesToRadians(pitch));
+    lookAt.z = Tyra::Math::sin(Cs::Utils::degreesToRadians(yaw)) * Tyra::Math::cos(Cs::Utils::degreesToRadians(pitch));
     
     lookAt += position;
 }

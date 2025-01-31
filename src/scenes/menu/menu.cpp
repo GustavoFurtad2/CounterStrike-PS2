@@ -2,7 +2,7 @@
 #include "scenes/menu/menu.hpp"
 #include "scenes/gameplay/gameplay.hpp"
 
-Menu::Menu(Tyra::Engine* t_engine, SceneManager& sm)
+Menu::Menu(Tyra::Engine* t_engine, Cs::SceneManager& sm)
   : engine(t_engine),
     sceneManager(sm),
     title(t_engine, "assets/menu/title.png", Tyra::Vec2(5, 422), Tyra::Vec2(256, 21)),

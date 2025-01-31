@@ -1,13 +1,9 @@
 #pragma once
 
-#include <tyra>
-
-#include <cmath>
 #include <chrono>
 #include <string>
 #include <iostream>
 
-#include "utils.hpp"
 #include "player/camera.hpp"
 #include "components/staticModel.hpp"
 #include "components/animatedModel.hpp"

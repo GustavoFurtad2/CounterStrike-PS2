@@ -4,7 +4,6 @@
 #include <string>
 #include <chrono>
 
-#include "utils.hpp"
 #include "components/image.hpp"
 #include "components/textureAtlas.hpp"
 

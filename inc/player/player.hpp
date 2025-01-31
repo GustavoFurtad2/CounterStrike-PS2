@@ -1,8 +1,5 @@
 #pragma once
 
-#include <tyra>
-
-#include "utils.hpp"
 #include "player/item.hpp"
 #include "player/camera.hpp"
 #include "scenes/gameplay/hud.hpp"

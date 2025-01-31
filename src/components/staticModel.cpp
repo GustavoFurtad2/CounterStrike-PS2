@@ -1,5 +1,3 @@
-#include <cmath>
-
 #include "components/staticModel.hpp"
 
 Model::Model(Tyra::Engine* t_engine, const char modelPath[], const char texturePath[], float scale) : engine(t_engine) {

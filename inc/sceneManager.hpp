@@ -3,29 +3,34 @@
 #include <memory>
 #include "scene.hpp"
 
-class SceneManager {
+namespace Cs
+{
 
-    public:
+    class SceneManager {
 
-        SceneManager() {}
+        public:
 
-        void setScene(std::unique_ptr<Scene> scene) {
-            currentScene = std::move(scene);
+            SceneManager() {}
 
-            currentScene->init();
-        }
+            void setScene(std::unique_ptr<Scene> scene) {
+                currentScene = std::move(scene);
 
-        void handleScene() {
-
-            if (currentScene) {
-                
-                currentScene->update();
-                currentScene->render();
+                currentScene->init();
             }
-        }
 
-    private:
+            void handleScene() {
 
-        std::unique_ptr<Scene> currentScene;
+                if (currentScene) {
+                
+                    currentScene->update();
+                    currentScene->render();
+                }
+            }
 
-};
+        private:
+
+            std::unique_ptr<Scene> currentScene;
+
+    };
+
+}
