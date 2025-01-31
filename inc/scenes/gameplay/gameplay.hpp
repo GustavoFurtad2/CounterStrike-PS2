@@ -11,11 +11,11 @@
 
 class SceneManager;
 
-class Gameplay : public Scene {
+class Gameplay : public Cs::Scene {
 
     public:
 
-        explicit Gameplay(Tyra::Engine* t_engine, SceneManager& sm);
+        explicit Gameplay(Tyra::Engine* t_engine, Cs::SceneManager& sm);
 
         ~Gameplay() override;
 
@@ -52,6 +52,6 @@ class Gameplay : public Scene {
         // AnimatedModel handle;
         // AnimatedModel magazine;
 
-        SceneManager& sceneManager;
+        Cs::SceneManager& sceneManager;
 
 };

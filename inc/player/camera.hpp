@@ -2,8 +2,6 @@
 
 #include <tyra>
 
-#include "utils.hpp"
-
 class Camera {
 
     public:

@@ -1,12 +1,16 @@
 #pragma once
 
-class Scene {
+namespace Cs {
 
-    public:
+    class Scene {
 
-        virtual ~Scene() = default;
-        virtual void init() = 0;
-        virtual void update() = 0;
-        virtual void render() = 0;
+        public:
 
-};
+            virtual ~Scene() = default;
+            virtual void init() = 0;
+            virtual void update() = 0;
+            virtual void render() = 0;
+
+    };
+
+}

@@ -1,4 +1,5 @@
 #include "player/item.hpp"
+#include "utils.hpp"
 
 Gun::Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels)
   : Item(t_engine, name, ItemType::Gun, gunModels), baseDamage(baseDamage) {
@@ -32,7 +33,7 @@ void Gun::update(const Camera &playerCamera) {
     }
     else {
 
-        bobbingOffset.z = lerp(bobbingOffset.z, 0.0f, 0.1);
+        bobbingOffset.z = Cs::Utils::lerp(bobbingOffset.z, 0.0f, 0.1);
     }
 
     if (engine->pad.getPressed().R2 && !isShooting && isShootable) {
@@ -52,7 +53,7 @@ Tyra::Vec4 Gun::calculateBobbingOffsetInDirection(const Camera &playerCamera) {
 
     if (isShooting) {
 
-        bobbingOffset.z = lerp(bobbingOffset.z, 0.0f, 0.2);
+        bobbingOffset.z = Cs::Utils::lerp(bobbingOffset.z, 0.0f, 0.2);
         return Tyra::Vec4(bobbingOffset.x, bobbingOffset.y, bobbingOffset.z);
     }
     else if (gunSwinging && playerCamera.getIsMoving()) {
@@ -60,7 +61,7 @@ Tyra::Vec4 Gun::calculateBobbingOffsetInDirection(const Camera &playerCamera) {
         std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
         std::chrono::milliseconds elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - timerSincePlayerIsWalking);
 
-        bobbingOffset.z = lerp(bobbingOffset.z, ((static_cast<int>(elapsed.count() / 1000)) % 2 == 1) ? -200.0f : 10.0f, 0.05);
+        bobbingOffset.z = Cs::Utils::lerp(bobbingOffset.z, ((static_cast<int>(elapsed.count() / 1000)) % 2 == 1) ? -200.0f : 10.0f, 0.05);
 
         return Tyra::Vec4(bobbingOffset.x, bobbingOffset.y, bobbingOffset.z);
     }

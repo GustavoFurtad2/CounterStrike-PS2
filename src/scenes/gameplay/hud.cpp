@@ -102,7 +102,7 @@ void HUD::renderGunIcons() {
         gunIconAtlas10.renderSprite("ak47Icon", gunIconColor);
         gunIconAtlas1.renderSprite("uspIcon", gunIconColor);
         gunIconAtlas10.renderSprite("knifeIcon", gunIconColor);
-        gunIconColor.a = lerp(gunIconColor.a, 0, 0.005);
+        gunIconColor.a = Cs::Utils::lerp(gunIconColor.a, 0, 0.005);
     }
 }
 

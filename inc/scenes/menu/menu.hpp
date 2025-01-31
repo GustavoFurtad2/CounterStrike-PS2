@@ -1,6 +1,5 @@
 #pragma once
 
-#include <tyra>
 #include <iostream>
 
 #include "scene.hpp"
@@ -8,11 +7,11 @@
 
 class SceneManager;
 
-class Menu : public Scene {
+class Menu : public Cs::Scene {
 
     public:
 
-        explicit Menu(Tyra::Engine* t_engine, SceneManager& sm);
+        explicit Menu(Tyra::Engine* t_engine, Cs::SceneManager& sm);
 
         ~Menu() override;
 
@@ -24,7 +23,7 @@ class Menu : public Scene {
 
         Tyra::Engine* engine;
 
-        SceneManager& sceneManager;
+        Cs::SceneManager& sceneManager;
 
         Image title;
         Image background;

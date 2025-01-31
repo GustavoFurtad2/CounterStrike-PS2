@@ -2,7 +2,7 @@
 #include "scenes/menu/menu.hpp"
 #include "scenes/gameplay/gameplay.hpp"
 
-Gameplay::Gameplay(Tyra::Engine* t_engine, SceneManager& sm)
+Gameplay::Gameplay(Tyra::Engine* t_engine, Cs::SceneManager& sm)
   : engine(t_engine),
     player(t_engine),
     sceneManager(sm),
