@@ -2,86 +2,94 @@
 
 #include <algorithm>
 
-namespace Tyra {
+Camera::Camera(Tyra::Pad* t_pad)
+  : lookAt(0.0f),
+    position(-2767.37, 30.0f, -8166.36),
+    pad(t_pad),
+    circleRotation(0.0f),
+    circleLength(30.0f),
+    pitch(0.0f),
+    yaw(270.0f),
+    sensitivity(4.58425f) {}
 
-    Camera::Camera(Tyra::Pad* t_pad)
-      : lookAt(0.0F),
-        position(-944.0F, 700.0F, -3678.0F),
-        pad(t_pad),
-        circleRotation(-5.0F),
-        circleLength(30.0F),
-        speed(20.0F),
-        lookAtHeight(-4.0F) {}
+Camera::~Camera() {}
 
-    Camera::~Camera() {}
+void Camera::update() {
 
-    void Camera::update() {
+    rotate();
+    updatePosition();
+    updateLookAt();
+}
 
-        updatePosition();
-        updateLookAt();
+void Camera::rotate() {
+
+    const auto& rightJoy = pad->getRightJoyPad();
+
+    if (rightJoy.h <= 100) {
+        yaw -= sensitivity;
+    } 
+    else if (rightJoy.h >= 200) {
+        yaw += sensitivity;
     }
 
-    void Camera::updatePosition() {
-
-        const auto& leftJoy = pad->getLeftJoyPad();
-
-        Vec4 direction;
-
-        if (unitCircle.length() > 0.0F) {
-            direction = Vec4(unitCircle).getNormalized() * speed;
-        }
-        else {
-            direction = Tyra::Vec4(0.0F);
-        }
-
-        if (leftJoy.v <= 100) {
-
-            position.x += direction.x;
-            position.z += direction.z;
-        }
-        else if (leftJoy.v >= 200) {
-            position.x += -direction.x;
-            position.z += -direction.z;
-        }
-
-        if (leftJoy.h <= 100) {
-            position.x += direction.z;
-            position.z += -direction.x;
-        }
-        else if (leftJoy.h >= 200) {
-            position.x += -direction.z;
-            position.z += direction.x;
-        }
-
-        position.y = 700.0F;
+    if (rightJoy.v <= 100) {
+        pitch += sensitivity;
+    } 
+    else if (rightJoy.v >= 200) {
+        pitch -= sensitivity;
     }
 
-    void Camera::updateLookAt() {
-
-        const float rotationOffset = 0.045F;
-        const float heightOffset = 2.0F;
-        const auto& rightJoy = pad->getRightJoyPad();
-
-        if (rightJoy.h <= 100) {
-            circleRotation -= rotationOffset * (200 - rightJoy.h) / 100.0F;
-        } 
-        else if (rightJoy.h >= 200) {
-            circleRotation += rotationOffset * (rightJoy.h - 200) / 100.0F;
-        }
-
-        if (rightJoy.v <= 100) {
-            lookAtHeight -= heightOffset * (200 - rightJoy.v) / 100.0F;
-        }
-        else if (rightJoy.v >= 200) {
-            lookAtHeight += heightOffset * (rightJoy.v - 200) / 100.0F;
-        }
-
-        lookAtHeight = std::clamp(lookAtHeight, -50.0F, 50.0F);
-
-        unitCircle.x = Math::sin(circleRotation) * circleLength;
-        unitCircle.y = lookAtHeight;
-        unitCircle.z = Math::cos(circleRotation) * circleLength;
-
-        lookAt = unitCircle + position;
+    if (pitch > 89.0F) {
+        pitch = 89.0F; 
     }
+    else if (pitch < -89.0F) {
+        pitch = -89.0F;
+    }
+}
+
+void Camera::updatePosition() {
+
+    const auto& leftJoy = pad->getLeftJoyPad();
+
+    Tyra::Vec4 forward(
+        Tyra::Math::cos(degreesToRadians(yaw)),
+        0.0F,
+        Tyra::Math::sin(degreesToRadians(yaw))
+    );
+
+    Tyra::Vec4 right(
+        Tyra::Math::cos(degreesToRadians(yaw + 90.0F)),
+        0.0F,
+        Tyra::Math::sin(degreesToRadians(yaw + 90.0F))
+    );
+
+    forward.normalize();
+    right.normalize();
+
+    if (leftJoy.v <= 100) {
+        position += forward * speed;
+    }
+    else if (leftJoy.v >= 200) {
+        position -= forward * speed;
+    }
+
+    if (leftJoy.h <= 100) {
+        position -= right * speed;
+    }
+    else if (leftJoy.h >= 200) {
+        position += right * speed;
+    }
+
+    position.y = 30.0F;
+
+    isMoving = leftJoy.v <= 100 || leftJoy.v >= 200 || leftJoy.h <= 100 || leftJoy.h >= 200;
+}
+
+void Camera::updateLookAt() {
+
+    lookAt.x = Tyra::Math::cos(degreesToRadians(yaw)) * Tyra::Math::cos(degreesToRadians(pitch));
+    lookAt.y = Tyra::Math::sin(degreesToRadians(pitch));
+    lookAt.z = Tyra::Math::sin(degreesToRadians(yaw)) * Tyra::Math::cos(degreesToRadians(pitch));
+    
+    lookAt += position;
 }

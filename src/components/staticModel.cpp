@@ -15,7 +15,7 @@ Model::Model(Tyra::Engine* t_engine, const char modelPath[], const char textureP
     mesh = std::make_unique<Tyra::StaticMesh>(data.get());
 
     renderOptions.frustumCulling = Tyra::PipelineFrustumCulling_None;
-
+    
     engine->renderer.getTextureRepository().addByMesh(mesh.get(), Tyra::FileUtils::fromCwd(texturePath), "png");
 }
 

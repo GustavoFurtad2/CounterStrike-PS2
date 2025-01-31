@@ -1,11 +1,12 @@
 #include "sceneManager.hpp"
+#include "scenes/menu/menu.hpp"
 #include "scenes/gameplay/gameplay.hpp"
 
 Gameplay::Gameplay(Tyra::Engine* t_engine, SceneManager& sm)
   : engine(t_engine),
     player(t_engine),
     sceneManager(sm),
-    map(t_engine, "assets/gameplay/maps/de_dust2/De_dust2.obj", "assets/gameplay/maps/de_dust2/", 200.0f) {}
+    map(t_engine, "assets/gameplay/maps/de_dust2/De_dust2.obj", "assets/gameplay/maps/de_dust2/", 500.0f) {}
 
 Gameplay::~Gameplay() {
 
