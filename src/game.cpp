@@ -6,7 +6,7 @@ namespace Cs {
 
     Game::Game(Engine* t_engine) : engine(t_engine), sceneManager() {
 
-        sceneManager.setScene(std::make_unique<Menu>(t_engine, sceneManager));
+        sceneManager.setScene(std::make_unique<Gameplay>(t_engine, sceneManager));
     }
 
     Game::~Game() {
