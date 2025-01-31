@@ -1,4 +1,5 @@
 #include "scenes/gameplay/hud.hpp"
+#include "utils.hpp"
 
 HUD::HUD(Tyra::Engine* t_engine)
   : engine(t_engine),
