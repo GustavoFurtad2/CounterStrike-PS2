@@ -73,7 +73,11 @@ class Gun : public Item {
             return cartridges;
         }
 
-        bool isShootable = false;
+        bool getIsShooting() {
+            return isShooting;
+        }
+
+        bool isShootable = true;
 
     private:
 

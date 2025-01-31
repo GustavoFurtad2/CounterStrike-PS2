@@ -21,10 +21,6 @@ void Gameplay::init() {
 void Gameplay::update() {
 
     player.update();
-
-    if (engine->pad.getPressed().Cross) {
-        sceneManager.setScene(std::make_unique<Menu>(engine, sceneManager));
-    }
 }
 
 void Gameplay::render() {

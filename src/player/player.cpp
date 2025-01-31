@@ -2,6 +2,7 @@
 
 Player::Player(Tyra::Engine* t_engine) 
   : hud(t_engine),
+    engine(t_engine),
     camera(&t_engine->pad), 
     usp(t_engine, "usp", 30, {
         new AnimatedModel(t_engine, "assets/gameplay/guns/usp/left_arm.md2", "assets/gameplay/guns/usp/", 50.0f),        
@@ -43,6 +44,22 @@ Player::~Player() {
 void Player::update() {
 
     camera.update();
+
+    if (engine->pad.getPressed().Triangle && !equippedGun->getIsShooting() && !holdingTriangle) {
+
+        currentGunIndex += 1;
+
+        if (currentGunIndex > static_cast<int>(gunType::TotalGunTypeItems) - 1) {
+            currentGunIndex = 0;
+        }
+
+        holdingTriangle = true;
+    }
+    else if (!engine->pad.getPressed().Triangle) {
+        
+        holdingTriangle = false;
+    }
+
 }
 
 void Player::renderHUD() {
@@ -53,5 +70,13 @@ void Player::renderHUD() {
 void Player::renderGun() {
 
     equippedGun->update(camera);
+
+    if (currentGunIndex == static_cast<int>(gunType::Usp)) {
+        equippedGun = &usp;
+    }
+    else if (currentGunIndex == static_cast<int>(gunType::Ak47)) {
+        equippedGun = &ak47;
+    }
+
     equippedGun->render(camera, Tyra::Vec4(80.0f, 45.0f, 30.0f), Tyra::Vec4(degreesToRadians(90), 0.0f, 0.0f));
 }

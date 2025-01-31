@@ -7,6 +7,12 @@
 #include "player/camera.hpp"
 #include "scenes/gameplay/hud.hpp"
 
+enum class gunType {
+    Usp,
+    Ak47,
+    TotalGunTypeItems
+};
+
 class Player {
 
     public:
@@ -24,11 +30,17 @@ class Player {
 
     private:
 
+        Tyra::Engine* engine;
+
         HUD hud;
 
         Gun usp;
         Gun ak47;
         Gun *equippedGun;
+
+        int currentGunIndex = 0;
+
+        bool holdingTriangle = false;
 
         Camera camera;
 
