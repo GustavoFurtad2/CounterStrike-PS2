@@ -20,7 +20,6 @@ class HUD {
 
         void displayNumber(unsigned int number, Tyra::Vec2 position, Tyra::Color color);
 
-        void transitionColor(Tyra::Color& currentColor, const Tyra::Color& targetColor, float speed);
         void renderMoney();
         void renderTimer();
         void renderGunIcons();

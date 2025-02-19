@@ -43,20 +43,12 @@ void HUD::displayNumber(unsigned int number, Tyra::Vec2 position, Tyra::Color co
     }
 }
 
-void HUD::transitionColor(Tyra::Color& currentColor, const Tyra::Color& targetColor, float speed) {
-
-    currentColor.r += (targetColor.r - currentColor.r) * speed;
-    currentColor.g += (targetColor.g - currentColor.g) * speed;
-    currentColor.b += (targetColor.b - currentColor.b) * speed;
-    currentColor.a += (targetColor.a - currentColor.a) * speed;
-}
-
 void HUD::renderMoney() {
 
     static Tyra::Color currentColor(0, 255, 0, 48);
     Tyra::Color targetColor(252, 140, 0, 48);
 
-    transitionColor(currentColor, targetColor, 0.01f);
+    Cs::Utils::transitionColor(currentColor, targetColor, 0.01f);
 
     hudAtlas.renderSprite("dollar", currentColor);
     displayNumber(money, Tyra::Vec2(479, 373), currentColor);
