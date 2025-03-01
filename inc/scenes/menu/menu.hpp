@@ -22,13 +22,11 @@ class Menu : public Cs::Scene {
     private:
 
         Tyra::Engine* engine;
-        Tyra::FontData menuFont;
-
-        Tyra::Sprite fontSprite;
 
         Cs::SceneManager& sceneManager;
 
         Image title;
+        Image newgame;
         Image background;
 
 };
