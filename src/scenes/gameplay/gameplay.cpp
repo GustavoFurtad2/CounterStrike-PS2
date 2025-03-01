@@ -2,11 +2,11 @@
 #include "scenes/menu/menu.hpp"
 #include "scenes/gameplay/gameplay.hpp"
 
-Gameplay::Gameplay(Tyra::Engine* t_engine, Cs::SceneManager& sm)
+Gameplay::Gameplay(Tyra::Engine* t_engine, Cs::SceneManager& _sceneManager, std::unique_ptr<Player> _player, std::unique_ptr<Model> _map)
   : engine(t_engine),
-    player(t_engine),
-    sceneManager(sm),
-    map(t_engine, "assets/gameplay/maps/de_dust2/De_dust2.obj", "assets/gameplay/maps/de_dust2/", 500.0f) {}
+    player(std::move(_player)),
+    sceneManager(_sceneManager),
+    map(std::move(_map)) {}
 
 Gameplay::~Gameplay() {
 
@@ -20,19 +20,19 @@ void Gameplay::init() {
 
 void Gameplay::update() {
 
-    player.update();
+    player->update();
 }
 
 void Gameplay::render() {
 
     auto& renderer = engine->renderer;
 
-    renderer.beginFrame(player.getCameraInfo());
+    renderer.beginFrame(player->getCameraInfo());
 
-    map.render();
+    map->render();
 
-    player.renderGun();
-    player.renderHUD();
+    player->renderGun();
+    player->renderHUD();
 
     renderer.endFrame(); 
 }

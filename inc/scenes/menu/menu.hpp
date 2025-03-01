@@ -1,9 +1,13 @@
 #pragma once
 
+#include <memory>
 #include <iostream>
 
 #include "scene.hpp"
 #include "components/image.hpp"
+#include "components/staticModel.hpp"
+#include "components/loadingScreen.hpp"
+#include "player/player.hpp"
 
 class SceneManager;
 
@@ -28,5 +32,7 @@ class Menu : public Cs::Scene {
         Image title;
         Image newgame;
         Image background;
+
+        LoadingScreen loadingScreen;
 
 };

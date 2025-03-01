@@ -35,7 +35,7 @@ class Player {
         Gun ak47;
         Gun *equippedGun;
 
-        int currentGunIndex = 0;
+        int currentGunIndex = 1;
 
         bool holdingTriangle = false;
 

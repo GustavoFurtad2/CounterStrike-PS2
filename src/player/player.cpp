@@ -16,8 +16,7 @@ Player::Player(Tyra::Engine* t_engine)
         new AnimatedModel(t_engine, "assets/gameplay/guns/usp/handle.md2", "assets/gameplay/guns/usp/", 50.0f),      
         new AnimatedModel(t_engine, "assets/gameplay/guns/usp/magazine.md2", "assets/gameplay/guns/usp/", 50.0f),
         new AnimatedModel(t_engine, "assets/gameplay/guns/usp/silencer.md2", "assets/gameplay/guns/usp/", 50.0f),
-    }
-    ),
+    }),
     ak47(t_engine, "ak47", 30, {
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/left_arm.md2", "assets/gameplay/guns/ak47/", 50.0f),        
         new AnimatedModel(t_engine, "assets/gameplay/guns/ak47/left_finger.md2", "assets/gameplay/guns/ak47/", 50.0f),  
