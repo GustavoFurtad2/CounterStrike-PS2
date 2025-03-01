@@ -7,15 +7,19 @@ Menu::Menu(Tyra::Engine* t_engine, Cs::SceneManager& sm)
     sceneManager(sm),
     loadingScreen(t_engine, 2),
     title(t_engine, "assets/menu/title.png", Tyra::Vec2(20, 413), Tyra::Vec2(256, 21)),
-    newgame(t_engine, "assets/menu/newgame.png", Tyra::Vec2(20, 385), Tyra::Vec2(64, 16)),
     background(t_engine, "assets/menu/background.png", Tyra::Vec2(0, 0), Tyra::Vec2(512, 448)) {}
 
 Menu::~Menu() {
 
+    engine->font.unloadFontDataVRAM(&menuFont);
+    TYRA_LOG("Release: Menu Font");
     TYRA_LOG("Release: Menu Scene");
 }
 
-void Menu::init() {}
+void Menu::init() {
+
+    engine->font.loadFont(&menuFont, 32, Tyra::FileUtils::fromCwd("assets/menu/trebuc.ttf").c_str());
+}
 
 void Menu::update() {
 
@@ -27,6 +31,7 @@ void Menu::update() {
 void Menu::render() {
 
     auto& renderer = engine->renderer;
+    auto& font = engine->font;
 
     renderer.beginFrame();
 
@@ -58,8 +63,10 @@ void Menu::render() {
         return;
     }
     else {
+        
         title.render();
-        newgame.render();
+
+        font.drawText(&menuFont, "New Game", 20, 385, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
     }
 
     renderer.endFrame();

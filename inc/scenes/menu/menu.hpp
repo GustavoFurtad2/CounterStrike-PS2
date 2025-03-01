@@ -27,10 +27,12 @@ class Menu : public Cs::Scene {
 
         Tyra::Engine* engine;
 
+        Tyra::FontData menuFont;
+        Tyra::Sprite fontSprite;
+
         Cs::SceneManager& sceneManager;
 
         Image title;
-        Image newgame;
         Image background;
 
         LoadingScreen loadingScreen;
