@@ -14,7 +14,7 @@ class Player {
 
     public:
 
-        Player(Tyra::Engine* t_engine);
+        Player(Tyra::Engine* t_engine, std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _ak47);
         ~Player();
 
         void update();
@@ -29,11 +29,12 @@ class Player {
 
         Tyra::Engine* engine;
 
-        HUD hud;
+        std::unique_ptr<HUD> hud;
 
-        Gun usp;
-        Gun ak47;
-        Gun *equippedGun;
+        std::unique_ptr<Gun> usp;
+        std::unique_ptr<Gun> ak47;
+       
+        Gun* equippedGun;
 
         int currentGunIndex = 1;
 

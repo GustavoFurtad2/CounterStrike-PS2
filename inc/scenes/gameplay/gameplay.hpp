@@ -5,10 +5,10 @@
 #include <iostream>
 
 #include "scene.hpp"
-#include "player/player.hpp"
 #include "components/staticModel.hpp"
 #include "components/animatedModel.hpp"
 #include "components/textureAtlas.hpp"
+#include "scenes/gameplay/hud.hpp"
 
 class SceneManager;
 

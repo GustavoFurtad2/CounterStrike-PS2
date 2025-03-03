@@ -8,6 +8,8 @@
 #include "components/staticModel.hpp"
 #include "components/loadingScreen.hpp"
 #include "player/player.hpp"
+#include "player/item.hpp"
+#include "scenes/gameplay/hud.hpp"
 
 class SceneManager;
 
