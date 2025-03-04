@@ -11,9 +11,10 @@ class HUD {
 
     public:
 
-        HUD(Tyra::Engine* t_engine);
+        HUD();
         ~HUD();
 
+        void init();
         void render(int bulletsGun, int bulletsPerCartridge, int cartridges);
 
     private:
@@ -31,8 +32,6 @@ class HUD {
         int remainSeconds = 0;
 
         std::chrono::high_resolution_clock::time_point startTimer = std::chrono::high_resolution_clock::now();
-
-        Tyra::Engine* engine;
 
         TextureAtlas hudAtlas;
         TextureAtlas gunIconAtlas1;

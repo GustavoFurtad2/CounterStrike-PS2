@@ -24,9 +24,10 @@ class Item {
 
     public:
 
-        Item(Tyra::Engine* t_engine, const std::string& name, ItemType type, const std::vector<AnimatedModel*> itemModels)
-            : engine(t_engine), name(name), type(type), itemModels(itemModels) {};
+        Item();
         virtual ~Item() = default;
+
+        void init(const std::string& name, ItemType type, const std::vector<AnimatedModel*>& itemModels);
 
         std::string getName() const {
             return name;
@@ -37,8 +38,6 @@ class Item {
         }
 
     protected:
-
-        Tyra::Engine* engine;
 
         std::string name;
         ItemType type;
@@ -51,9 +50,10 @@ class Gun : public Item {
 
     public:
 
-        Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
+        Gun();
         ~Gun();
 
+        void init(const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
         void update(const Camera &playerCamera);
         void render(const Camera &playerCamera, const Tyra::Vec4 &gunPositionOffset, const Tyra::Vec4 &gunAngleOffset);
 

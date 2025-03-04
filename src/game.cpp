@@ -2,25 +2,36 @@
 
 namespace Cs {
 
-    using namespace Tyra;
+    static Tyra::Engine* engine;
 
-    Game::Game(Engine* t_engine) : engine(t_engine), sceneManager() {
+    static SceneManager sceneManager;
 
-        sceneManager.setScene(std::make_unique<Menu>(t_engine, sceneManager));
+    CSGame::CSGame(Tyra::Engine* t_engine) {
+        engine = t_engine;
     }
 
-    Game::~Game() {
+    CSGame::~CSGame() {
 
         TYRA_LOG("Released: Game");
     }       
 
-    void Game::init() {
+    void CSGame::init() {
 
+        sceneManager.setScene(std::make_unique<Menu>(sceneManager));
     }
 
-    void Game::loop() {
+    void CSGame::loop() {
 
         sceneManager.handleScene();
+    }
+
+    Tyra::Engine* GetEngine() {
+        return engine;
+    }
+
+    void changeScene(std::unique_ptr<Scene> scene) {
+
+        sceneManager.setScene(std::move(scene));
     }
 
 }

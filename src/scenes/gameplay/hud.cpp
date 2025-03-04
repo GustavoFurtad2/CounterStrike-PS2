@@ -1,15 +1,23 @@
 #include "scenes/gameplay/hud.hpp"
 #include "utils.hpp"
+#include "game.hpp"
 
-HUD::HUD(Tyra::Engine* t_engine)
-  : engine(t_engine),
-    hudAtlas(t_engine, "assets/gameplay/hud/textures/640hud7.png", "assets/gameplay/hud/config/hud7.txt", Tyra::Vec2(256, 256)),
-    gunIconAtlas1(t_engine, "assets/gameplay/hud/textures/640hud1.png", "assets/gameplay/hud/config/hud1.txt", Tyra::Vec2(256, 256)),
-    gunIconAtlas10(t_engine, "assets/gameplay/hud/textures/640hud10.png", "assets/gameplay/hud/config/hud10.txt", Tyra::Vec2(256, 256)),
+HUD::HUD() {}
 
-    radar(t_engine, "assets/gameplay/hud/textures/radar.png", Tyra::Vec2(0, 0), Tyra::Vec2(128, 128)) {
+HUD::~HUD() {
 
-    hudAtlas.getSprite("cross")->position = Tyra::Vec2(10, 411);     
+    TYRA_LOG("Release: HUD");
+}
+
+void HUD::init() {
+
+    hudAtlas.init("assets/gameplay/hud/textures/640hud7.png", "assets/gameplay/hud/config/hud7.txt", Tyra::Vec2(256, 256));
+    gunIconAtlas1.init("assets/gameplay/hud/textures/640hud1.png", "assets/gameplay/hud/config/hud1.txt", Tyra::Vec2(256, 256));
+    gunIconAtlas10.init("assets/gameplay/hud/textures/640hud10.png", "assets/gameplay/hud/config/hud10.txt", Tyra::Vec2(256, 256));
+
+    radar.init("assets/gameplay/hud/textures/radar.png", Tyra::Vec2(0, 0), Tyra::Vec2(128, 128));
+
+    hudAtlas.getSprite("cross")->position = Tyra::Vec2(10, 411);
     hudAtlas.getSprite("suitEmpty")->position = Tyra::Vec2(105, 412);
     hudAtlas.getSprite("stopwatch")->position = Tyra::Vec2(200, 412);
     hudAtlas.getSprite("bar")->position = Tyra::Vec2(414, 416);
@@ -20,9 +28,6 @@ HUD::HUD(Tyra::Engine* t_engine)
     gunIconAtlas10.getSprite("ak47Icon")->position = Tyra::Vec2(340, 215);
     gunIconAtlas1.getSprite("uspIcon")->position = Tyra::Vec2(340, 265);
     gunIconAtlas10.getSprite("knifeIcon")->position = Tyra::Vec2(340, 315);
-}
-
-HUD::~HUD() {
 
 }
 

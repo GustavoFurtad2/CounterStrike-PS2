@@ -16,7 +16,7 @@ class Gameplay : public Cs::Scene {
 
     public:
 
-        explicit Gameplay(Tyra::Engine* t_engine, Cs::SceneManager& _sceneManager, std::unique_ptr<Player> _player, std::unique_ptr<Model> _map);
+        explicit Gameplay(Cs::SceneManager& _sceneManager, std::unique_ptr<Player> _player, std::unique_ptr<Model> _map);
 
         ~Gameplay() override;
 
@@ -30,8 +30,6 @@ class Gameplay : public Cs::Scene {
         void setShoot();
 
         int currentAnim = 0;
-
-        Tyra::Engine* engine;
 
         std::unique_ptr<Player> player;
         std::unique_ptr<Model> map;

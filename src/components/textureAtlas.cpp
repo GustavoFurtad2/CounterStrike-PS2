@@ -1,6 +1,9 @@
 #include "components/textureAtlas.hpp"
+#include "game.hpp"
 
-TextureAtlas::TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], const char configPath[], Tyra::Vec2 size) : engine(t_engine) {
+TextureAtlas::TextureAtlas() {}
+
+void TextureAtlas::init(const char texturePath[], const char configPath[], Tyra::Vec2 size) {
 
     std::ifstream configFile(configPath);
 
@@ -13,7 +16,7 @@ TextureAtlas::TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], con
     atlas.position = Tyra::Vec2(0, 0);
     atlas.size = size;
 
-    auto& textureRepository = engine->renderer.getTextureRepository();
+    auto& textureRepository =  Cs::GetEngine()->renderer.getTextureRepository();
 
     auto filepath = Tyra::FileUtils::fromCwd(texturePath);
     auto* texture = textureRepository.add(filepath);
@@ -59,7 +62,7 @@ void TextureAtlas::renderSprite(const std::string& name) {
     Tyra::Sprite* sprite = getSprite(name);
 
     if (sprite) {
-        engine->renderer.renderer2D.render(*sprite);
+        Cs::GetEngine()->renderer.renderer2D.render(*sprite);
     }
 }
 void TextureAtlas::renderSprite(const std::string& name, const Tyra::Color& color) {
@@ -68,17 +71,17 @@ void TextureAtlas::renderSprite(const std::string& name, const Tyra::Color& colo
 
     if (sprite) {
         sprite->color = color;
-        engine->renderer.renderer2D.render(*sprite);
+        Cs::GetEngine()->renderer.renderer2D.render(*sprite);
     }
 }
 
 TextureAtlas::~TextureAtlas() {
 
     for (auto& sprite : sprites) {
-        engine->renderer.getTextureRepository().freeBySprite(sprite);
+        Cs::GetEngine()->renderer.getTextureRepository().freeBySprite(sprite);
     }
 
-    engine->renderer.getTextureRepository().freeBySprite(atlas);
+    Cs::GetEngine()->renderer.getTextureRepository().freeBySprite(atlas);
 
     TYRA_LOG("Release: Texture Atlas Component");
 }

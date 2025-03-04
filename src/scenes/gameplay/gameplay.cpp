@@ -1,12 +1,14 @@
 #include "sceneManager.hpp"
 #include "scenes/menu/menu.hpp"
 #include "scenes/gameplay/gameplay.hpp"
+#include "game.hpp"
 
-Gameplay::Gameplay(Tyra::Engine* t_engine, Cs::SceneManager& _sceneManager, std::unique_ptr<Player> _player, std::unique_ptr<Model> _map)
-  : engine(t_engine),
-    player(std::move(_player)),
-    sceneManager(_sceneManager),
-    map(std::move(_map)) {}
+Gameplay::Gameplay(Cs::SceneManager& _sceneManager, std::unique_ptr<Player> _player, std::unique_ptr<Model> _map)
+  : sceneManager(_sceneManager) {
+
+    player = std::move(_player);
+    map = std::move(_map);
+}
 
 Gameplay::~Gameplay() {
 
@@ -15,7 +17,8 @@ Gameplay::~Gameplay() {
 
 void Gameplay::init() {
 
-    engine->renderer.setClearScreenColor(Tyra::Color(122, 202, 255));
+    player->init();
+    Cs::GetEngine()->renderer.setClearScreenColor(Tyra::Color(122, 202, 255));
 }
 
 void Gameplay::update() {
@@ -25,7 +28,7 @@ void Gameplay::update() {
 
 void Gameplay::render() {
 
-    auto& renderer = engine->renderer;
+    auto& renderer = Cs::GetEngine()->renderer;
 
     renderer.beginFrame(player->getCameraInfo());
 

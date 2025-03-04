@@ -9,22 +9,20 @@
 
 namespace Cs {
 
-    class Game : public Tyra::Game {
+    class CSGame : public Tyra::Game {
 
         public:
     
-            Game(Tyra::Engine* engine);
-            ~Game();
+            CSGame(Tyra::Engine* engine);
+            ~CSGame();
 
             void init();
             void loop();
 
-        private:
-
-            Tyra::Engine* engine;
-
-            SceneManager sceneManager;
-
     };
+    
+    Tyra::Engine* GetEngine();
+
+    void changeScene(std::unique_ptr<Scene> scene);
 
 }

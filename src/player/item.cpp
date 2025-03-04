@@ -1,11 +1,18 @@
 #include "player/item.hpp"
 #include "utils.hpp"
+#include "game.hpp"
 
-Gun::Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels)
-  : Item(t_engine, name, ItemType::Gun, gunModels), baseDamage(baseDamage) {
+Item::Item() : type(ItemType::Gun) {}
 
-    setAnimationIdle();
+void Item::init(const std::string& name, ItemType type, const std::vector<AnimatedModel*>& itemModels) {
+
+    this->name = name;
+    this->type = type;
+
+    this->itemModels = itemModels;
 }
+
+Gun::Gun() : Item() {}
 
 Gun::~Gun() {
 
@@ -16,6 +23,12 @@ Gun::~Gun() {
     itemModels.clear();
 
     TYRA_LOG("Release: Gun " + name);
+}
+
+void Gun::init(const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels) {
+
+    Item::init(name, ItemType::Gun, gunModels);
+    setAnimationIdle();
 }
 
 void Gun::update(const Camera &playerCamera) {
@@ -36,7 +49,7 @@ void Gun::update(const Camera &playerCamera) {
         bobbingOffset.z = Cs::Utils::lerp(bobbingOffset.z, 0.0f, 0.1);
     }
 
-    if (engine->pad.getPressed().R2 && !isShooting && isShootable) {
+    if (Cs::GetEngine()->pad.getPressed().R2 && !isShooting && isShootable) {
 
         isShooting = true;
         setAnimationShoot();

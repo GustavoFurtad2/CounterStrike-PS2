@@ -8,9 +8,10 @@ class LoadingScreen {
 
     public:
 
-        LoadingScreen(Tyra::Engine* t_engine, unsigned int itemsToLoad);
+        LoadingScreen(unsigned int itemsToLoad);
         ~LoadingScreen();
 
+        void init();
         void draw();
         void update();
 
@@ -26,9 +27,7 @@ class LoadingScreen {
         unsigned int itemsToLoad = 0;
         unsigned int loadedItems = 0;
 
-        unsigned int maxProgress = 21;
-
-        Tyra::Engine* engine;
+        const unsigned int maxProgress = 21;
 
         Image consoleLoadingScreen;
         Image consoleProgressBar;

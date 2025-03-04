@@ -6,9 +6,10 @@ class Image {
 
     public:
 
-        Image(Tyra::Engine* t_engine, const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size);
+        Image();
         ~Image();
 
+        void init(const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size);
         void render();
         void render(Tyra::Color color);
 
@@ -30,7 +31,6 @@ class Image {
 
     private:
 
-        Tyra::Engine* engine;
         Tyra::Sprite image;
 
 };

@@ -1,8 +1,9 @@
 #include "components/animatedModel.hpp"
+#include "game.hpp"
 
-AnimatedModel::AnimatedModel(Tyra::Engine* t_engine, const char modelPath[], const char texturePath[], float scale) : engine(t_engine) {
+AnimatedModel::AnimatedModel(const char modelPath[], const char texturePath[], float scale) {
 
-    dynpip.setRenderer(&engine->renderer.core);
+    dynpip.setRenderer(&Cs::GetEngine()->renderer.core);
 
     Tyra::MD2LoaderOptions options;
 
@@ -18,18 +19,18 @@ AnimatedModel::AnimatedModel(Tyra::Engine* t_engine, const char modelPath[], con
         this->animationCallback(callback);
     });
 
-    engine->renderer.getTextureRepository().addByMesh(mesh.get(), Tyra::FileUtils::fromCwd(texturePath), "png");
+    Cs::GetEngine()->renderer.getTextureRepository().addByMesh(mesh.get(), Tyra::FileUtils::fromCwd(texturePath), "png");
 }
 
 AnimatedModel::~AnimatedModel() {
 
-    engine->renderer.getTextureRepository().freeByMesh(mesh.get());
+    Cs::GetEngine()->renderer.getTextureRepository().freeByMesh(mesh.get());
     TYRA_LOG("Release: Animated Model Component");
 }
 
 void AnimatedModel::render() {
     
-    engine->renderer.renderer3D.usePipeline(dynpip);
+    Cs::GetEngine()->renderer.renderer3D.usePipeline(dynpip);
 
     mesh->update();
 

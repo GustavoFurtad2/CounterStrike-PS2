@@ -1,13 +1,22 @@
 #include "components/image.hpp"
+#include "game.hpp"
 
-Image::Image(Tyra::Engine* t_engine, const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size) : engine(t_engine) {
+Image::Image() {}
+
+Image::~Image() {
+
+    Cs::GetEngine()->renderer.getTextureRepository().freeBySprite(image);
+    TYRA_LOG("Release: Image Component");
+}
+
+void Image::init(const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size) {
 
     image.mode = Tyra::SpriteMode::MODE_STRETCH;
 
     image.position = position;
     image.size = size;
 
-    auto& textureRepository = engine->renderer.getTextureRepository();
+    auto& textureRepository =  Cs::GetEngine()->renderer.getTextureRepository();
 
     auto filepath = Tyra::FileUtils::fromCwd(imagePath);
 
@@ -17,20 +26,14 @@ Image::Image(Tyra::Engine* t_engine, const char imagePath[], Tyra::Vec2 position
 
 }
 
-Image::~Image() {
-
-    engine->renderer.getTextureRepository().freeBySprite(image);
-    TYRA_LOG("Release: Image Component");
-}
-
 void Image::render() {
 
-    engine->renderer.renderer2D.render(image);
+    Cs::GetEngine()->renderer.renderer2D.render(image);
 }
 
 void Image::render(Tyra::Color color) {
 
     image.color = color;
 
-    engine->renderer.renderer2D.render(image);
+    Cs::GetEngine()->renderer.renderer2D.render(image);
 }

@@ -6,7 +6,7 @@ class Camera {
 
     public:
 
-        Camera(Tyra::Pad* pad);
+        Camera();
         ~Camera();
 
         Tyra::Vec4 lookAt, position, unitCircle;

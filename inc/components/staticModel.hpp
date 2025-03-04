@@ -6,7 +6,7 @@ class Model {
 
     public:
 
-        Model(Tyra::Engine* t_engine, const char modelPath[], const char texturePath[], float scale);
+        Model(const char modelPath[], const char texturePath[], float scale);
         ~Model();
 
         void render();
@@ -31,8 +31,6 @@ class Model {
 
         Tyra::Vec4 position = Tyra::Vec4(0.0f, 0.0f, 0.0f, 1);
         Tyra::Vec4 angle = Tyra::Vec4(0.0f, 0.0f, 0.0f, 1);
-
-        Tyra::Engine* engine;
 
         Tyra::StaticPipeline stapip;
 

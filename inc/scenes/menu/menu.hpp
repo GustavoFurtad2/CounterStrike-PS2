@@ -17,7 +17,7 @@ class Menu : public Cs::Scene {
 
     public:
 
-        explicit Menu(Tyra::Engine* t_engine, Cs::SceneManager& sm);
+        explicit Menu(Cs::SceneManager& sm);
 
         ~Menu() override;
 
@@ -26,8 +26,6 @@ class Menu : public Cs::Scene {
         void render() override;
 
     private:
-
-        Tyra::Engine* engine;
 
         Tyra::FontData menuFont;
         Tyra::Sprite fontSprite;

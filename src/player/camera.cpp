@@ -1,10 +1,11 @@
 #include "player/camera.hpp"
 #include "utils.hpp"
+#include "game.hpp"
 
-Camera::Camera(Tyra::Pad* t_pad)
+Camera::Camera()
   : lookAt(0.0f),
     position(-2767.37, 30.0f, -8166.36),
-    pad(t_pad),
+    pad(&Cs::GetEngine()->pad),
     circleRotation(0.0f),
     circleLength(30.0f),
     pitch(0.0f),

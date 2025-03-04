@@ -14,9 +14,10 @@ class Player {
 
     public:
 
-        Player(Tyra::Engine* t_engine, std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _ak47);
+        Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _ak47);
         ~Player();
 
+        void init();
         void update();
         void renderHUD();
         void renderGun();
@@ -26,8 +27,6 @@ class Player {
         }
 
     private:
-
-        Tyra::Engine* engine;
 
         std::unique_ptr<HUD> hud;
 
