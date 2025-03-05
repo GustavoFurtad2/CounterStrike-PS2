@@ -63,25 +63,34 @@ void Player::init() {
 
 void Player::update() {
 
-    if (playerState == PlayerState::SelectingTeam) {
-        camera.setCameraType(CameraType::Static);
-    }
+    switch (playerState) {
+    
+        case PlayerState::SelectingTeam:
 
-    camera.update();
+            camera.setCameraType(CameraType::Static);
+            break;
 
-    if (Cs::GetEngine()->pad.getPressed().Triangle && !equippedGun->getIsShooting() && !holdingTriangle) {
+        case PlayerState::Playing:
 
-        currentGunIndex += 1;
+            hud->update();
+            camera.update();
 
-        if (currentGunIndex > static_cast<int>(gunType::TotalGunTypeItems) - 1) {
-            currentGunIndex = 0;
-        }
-
-        holdingTriangle = true;
-    }
-    else if (!Cs::GetEngine()->pad.getPressed().Triangle) {
+            if (Cs::GetEngine()->pad.getPressed().Triangle && !equippedGun->getIsShooting() && !holdingTriangle) {
         
-        holdingTriangle = false;
+                currentGunIndex += 1;
+        
+                if (currentGunIndex > static_cast<int>(gunType::TotalGunTypeItems) - 1) {
+                    currentGunIndex = 0;
+                }
+        
+                holdingTriangle = true;
+            }
+            else if (!Cs::GetEngine()->pad.getPressed().Triangle) {
+                
+                holdingTriangle = false;
+            }
+    
+            break;
     }
 
 }

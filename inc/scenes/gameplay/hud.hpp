@@ -16,6 +16,7 @@ class HUD {
 
         void init();
         void render(int bulletsGun, int bulletsPerCartridge, int cartridges);
+        void update();
 
     private:
 
@@ -24,6 +25,8 @@ class HUD {
         void renderMoney();
         void renderTimer();
         void renderGunIcons();
+
+        bool debugModeActivated = false;
 
         int money = 800;
         float health = 100;

@@ -104,6 +104,13 @@ void HUD::renderGunIcons() {
     }
 }
 
+void HUD::update() {
+
+    if (Cs::GetEngine()->pad.getClicked().Select) {
+        debugModeActivated = !debugModeActivated;
+    }
+}
+
 void HUD::render(int bulletsGun, int bulletsPerCartridge, int cartridges) {
 
     hudAtlas.renderSprite("cross", Tyra::Color(252, 140, 0, 48));
@@ -123,4 +130,8 @@ void HUD::render(int bulletsGun, int bulletsPerCartridge, int cartridges) {
     renderGunIcons();
 
     radar.render(Tyra::Color(255, 255, 255, 48));
+
+    if (debugModeActivated) {
+        displayNumber(Cs::GetEngine()->info.getFps(), Tyra::Vec2(485, 5), Tyra::Color(252, 140, 0, 48));
+    }
 }
