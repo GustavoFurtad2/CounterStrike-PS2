@@ -13,6 +13,7 @@ enum class gunType {
 
 enum class PlayerState {
     SelectingTeam,
+    SelectingClass,
     Playing
 };
 
@@ -44,12 +45,16 @@ class Player {
         std::unique_ptr<Gun> ak47;
 
         Image mid;
+        Image terror;
         Image csLogo;
         Image selectTeam;
+        Image chooseAClass;
+        Image optionPhoenix;
         Image roundCornerTopLeft;
         Image roundCornerTopRight;
         Image roundCornerBottomLeft;
         Image roundCornerBottomRight;
+        Image characterBackground;
         Image optionTerroristForces;
 
         Gun* equippedGun;
