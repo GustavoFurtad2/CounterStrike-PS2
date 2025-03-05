@@ -24,6 +24,6 @@ namespace Cs {
     
     Tyra::Engine* GetEngine();
 
-    void changeScene(std::unique_ptr<Scene> scene);
+    void changeScene(std::unique_ptr<Scene>&& scene);
 
 }

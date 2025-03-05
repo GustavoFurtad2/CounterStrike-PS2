@@ -23,8 +23,35 @@ void Menu::init() {
 
 void Menu::update() {
 
-    if (Cs::GetEngine()->pad.getPressed().Cross) {
-        loadingScreen.isLoading = true;
+    if (currentMenuState == MenuState::MainMenu) {
+
+        if (Cs::GetEngine()->pad.getClicked().Cross) {
+
+            if (selectedOption == MenuOption::NewGame) {
+                loadingScreen.isLoading = true;
+            }
+            else if (selectedOption == MenuOption::Credits) {
+                currentMenuState = MenuState::Credits;
+            }
+    
+        }
+        else if (Cs::GetEngine()->pad.getClicked().DpadUp) {
+
+            unsigned int totalOptions = static_cast<unsigned int>(MenuOption::TotalOptions);
+
+            selectedOption = static_cast<MenuOption>((static_cast<int>(selectedOption) - 1 + totalOptions) % totalOptions);
+        }
+        else if (Cs::GetEngine()->pad.getClicked().DpadDown) {
+
+            selectedOption = static_cast<MenuOption>((static_cast<int>(selectedOption) + 1) % static_cast<unsigned int>(MenuOption::TotalOptions));
+        }
+    }
+    else if (currentMenuState == MenuState::Credits) {
+
+        if (Cs::GetEngine()->pad.getClicked().Triangle) {
+
+            currentMenuState = MenuState::MainMenu;    
+        }
     }
 }
 
@@ -36,7 +63,7 @@ void Menu::render() {
     if (loadingScreen.isLoading) {
 
         TYRA_LOG("Release: Menu Font");
-        Cs::GetEngine()->font.unloadFontDataVRAM(&menuFont);
+        font.unloadFontDataVRAM(&menuFont);
 
         renderer.beginFrame();
         background.render();
@@ -95,7 +122,16 @@ void Menu::render() {
 
     title.render();
 
-    font.drawText(&menuFont, "New Game", 20, 385, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+    if (currentMenuState == MenuState::MainMenu) {
+        font.drawText(&menuFont, "New Game", 20, 355, 14, Tyra::Color(255.0f, 255.0f, selectedOption == MenuOption::NewGame ? 0 : 255.0f, 128.0f));
+        font.drawText(&menuFont, "Credits", 20, 385, 14, Tyra::Color(255.0f, 255.0f, selectedOption == MenuOption::Credits ? 0 : 255.0f, 128.0f));
+    }
+    else if (currentMenuState == MenuState::Credits) {
+        font.drawText(&menuFont, "Credits", 20, 295, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+        font.drawText(&menuFont, "Created by Fatality", 20, 325, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+        font.drawText(&menuFont, "Thanks for helping me: GDQR(Edward), Wolf3s, Wellinator, Ez4r3k,", 20, 355, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+        font.drawText(&menuFont, "Adryanprogames.", 20, 380, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+    }
 
     renderer.endFrame();
 }

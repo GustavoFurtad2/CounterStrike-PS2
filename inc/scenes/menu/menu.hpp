@@ -13,6 +13,17 @@
 
 class SceneManager;
 
+enum class MenuOption {
+    NewGame,
+    Credits,
+    TotalOptions
+};
+
+enum class MenuState {
+    MainMenu,
+    Credits
+};
+
 class Menu : public Cs::Scene {
 
     public:
@@ -29,6 +40,9 @@ class Menu : public Cs::Scene {
 
         Tyra::FontData menuFont;
         Tyra::Sprite fontSprite;
+
+        MenuOption selectedOption = MenuOption::NewGame;
+        MenuState currentMenuState = MenuState::MainMenu;
 
         Cs::SceneManager& sceneManager;
 

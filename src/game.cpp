@@ -17,7 +17,7 @@ namespace Cs {
 
     void CSGame::init() {
 
-        sceneManager.setScene(std::make_unique<Intro>(sceneManager));
+        sceneManager.setScene(std::make_unique<Menu>(sceneManager));
     }
 
     void CSGame::loop() {
@@ -29,7 +29,7 @@ namespace Cs {
         return engine;
     }
 
-    void changeScene(std::unique_ptr<Scene> scene) {
+    void changeScene(std::unique_ptr<Scene>&& scene) {
 
         sceneManager.setScene(std::move(scene));
     }
