@@ -19,6 +19,17 @@ Player::~Player() {
 
 void Player::init() {
 
+    camera.position = Tyra::Vec4(14813.3f, 2340.0f, -10072.2f, 1.0f);
+
+    mid.init("assets/gui/mid.png", Tyra::Vec2(68, 20), Tyra::Vec2(368, 48));
+    csLogo.init("assets/gui/CS_logo.png", Tyra::Vec2(24, 24), Tyra::Vec2(32, 32));
+    selectTeam.init("assets/gui/select_team.png", Tyra::Vec2(67, 35), Tyra::Vec2(128, 16));
+    roundCornerTopLeft.init("assets/gui/round_corner_top_left.png", Tyra::Vec2(20, 20), Tyra::Vec2(48, 48));
+    roundCornerTopRight.init("assets/gui/round_corner_top_right.png", Tyra::Vec2(20, 20), Tyra::Vec2(48, 48));
+    roundCornerBottomLeft.init("assets/gui/round_corner_bottom_left.png", Tyra::Vec2(20, 20), Tyra::Vec2(48, 48));
+    roundCornerBottomRight.init("assets/gui/round_corner_bottom_right.png", Tyra::Vec2(20, 20), Tyra::Vec2(48, 48));
+    optionTerroristForces.init("assets/gui/button.png", Tyra::Vec2(67, 118), Tyra::Vec2(256, 32));
+
     hud->init();
     usp->init("usp", 30, std::vector<AnimatedModel*>{
             new AnimatedModel("assets/gameplay/guns/usp/left_arm.md2", "assets/gameplay/guns/usp/", 50.0f),        
@@ -52,6 +63,10 @@ void Player::init() {
 
 void Player::update() {
 
+    if (playerState == PlayerState::SelectingTeam) {
+        camera.setCameraType(CameraType::Static);
+    }
+
     camera.update();
 
     if (Cs::GetEngine()->pad.getPressed().Triangle && !equippedGun->getIsShooting() && !holdingTriangle) {
@@ -69,6 +84,46 @@ void Player::update() {
         holdingTriangle = false;
     }
 
+}
+
+void Player::render() {
+
+    switch (playerState) {
+
+        case PlayerState::SelectingTeam:
+
+            if (Cs::GetEngine()->pad.getPressed().Cross) {
+                playerState = PlayerState::Playing;
+                camera.setCameraType(CameraType::FirstPerson);
+                break;
+            }
+
+            mid.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(29, 20), Tyra::Vec2(454, 40));
+            mid.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(29, 64), Tyra::Vec2(454, 364));
+            mid.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(20, 29), Tyra::Vec2(8, 31));
+            mid.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(484, 29), Tyra::Vec2(8, 31));
+
+            mid.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(20, 64), Tyra::Vec2(8, 355));
+            mid.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(484, 64), Tyra::Vec2(8, 355));
+
+            roundCornerTopLeft.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(20, 20), Tyra::Vec2(8, 8));
+            roundCornerTopRight.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(484, 20), Tyra::Vec2(8, 8));
+            roundCornerBottomLeft.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(20, 420), Tyra::Vec2(8, 8));
+            roundCornerBottomRight.render(Tyra::Color(0, 0, 0, 100), Tyra::Vec2(484, 420), Tyra::Vec2(8, 8));
+
+            csLogo.render(Tyra::Color(222, 89, 0, 100));
+            selectTeam.render();
+            optionTerroristForces.render();
+
+            break;
+
+        case PlayerState::Playing:
+
+            renderGun();
+            renderHUD();
+            
+            break;
+    }
 }
 
 void Player::renderHUD() {

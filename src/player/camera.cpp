@@ -19,9 +19,17 @@ void Camera::update() {
     rotate();
     updatePosition();
     updateLookAt();
+
+    // TYRA_LOG("X: " + std::to_string(position.x) + " Y: " + std::to_string(position.y) + " Z: " + std::to_string(position.z));
+    // TYRA_LOG("RX: " + std::to_string(lookAt.x) + " RY: " + std::to_string(lookAt.y) + " RZ: " + std::to_string(lookAt.z));
+
 }
 
 void Camera::rotate() {
+
+    if (cameraType != CameraType::FirstPerson) {
+        return;
+    }
 
     const auto& rightJoy = pad->getRightJoyPad();
 
@@ -48,6 +56,10 @@ void Camera::rotate() {
 }
 
 void Camera::updatePosition() {
+
+    if (cameraType != CameraType::FirstPerson) {
+        return;
+    }
 
     const auto& leftJoy = pad->getLeftJoyPad();
 
@@ -80,7 +92,12 @@ void Camera::updatePosition() {
         position += right * speed;
     }
 
-    position.y = 30.0F;
+    if (pad->getPressed().DpadUp) {
+        position.y += 10.0f;
+    }
+    else if (pad->getPressed().DpadDown) {
+        position.y -= 10.0f;
+    }
 
     isMoving = leftJoy.v <= 100 || leftJoy.v >= 200 || leftJoy.h <= 100 || leftJoy.h >= 200;
 }

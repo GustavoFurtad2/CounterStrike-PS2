@@ -34,8 +34,7 @@ void Gameplay::render() {
 
     map->render();
 
-    player->renderGun();
-    player->renderHUD();
+    player->render();
 
     renderer.endFrame(); 
 }
