@@ -5,6 +5,7 @@
 #include "scene.hpp"
 #include "sceneManager.hpp"
 #include "scenes/menu/menu.hpp"
+#include "scenes/intro/intro.hpp"
 #include "scenes/gameplay/gameplay.hpp"
 
 namespace Cs {
