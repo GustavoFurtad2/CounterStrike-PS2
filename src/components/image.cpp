@@ -37,3 +37,20 @@ void Image::render(Tyra::Color color) {
 
     Cs::GetEngine()->renderer.renderer2D.render(image);
 }
+
+void Image::render(Tyra::Vec2 position, Tyra::Vec2 size) {
+
+    image.position = position;
+    image.size = size;
+
+    Cs::GetEngine()->renderer.renderer2D.render(image);
+}
+
+void Image::render(Tyra::Color color, Tyra::Vec2 position, Tyra::Vec2 size) {
+
+    image.color = color;
+    image.position = position;
+    image.size = size;
+
+    Cs::GetEngine()->renderer.renderer2D.render(image);
+}
