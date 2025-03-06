@@ -12,7 +12,7 @@ Intro::~Intro() {
 
 void Intro::init() {
 
-    warning.init("assets/intro/warning.png", Tyra::Vec2(0, 0), Tyra::Vec2(512, 448));
+    warning.init("assets/intro/warning.png", Tyra::Vec2(0, 1), Tyra::Vec2(512, 448));
     remainScreenTime = std::chrono::high_resolution_clock::now(); 
 }
 
