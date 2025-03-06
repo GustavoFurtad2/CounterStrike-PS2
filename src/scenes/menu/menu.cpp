@@ -67,7 +67,6 @@ void Menu::render() {
 
         renderer.beginFrame();
         background.render();
-        loadingScreen.update();
         loadingScreen.draw();
         renderer.endFrame();
 
@@ -91,7 +90,7 @@ void Menu::render() {
 
         renderer.beginFrame();
         background.render();
-
+        loadingScreen.update();
         loadingScreen.draw();
         renderer.endFrame();
 
