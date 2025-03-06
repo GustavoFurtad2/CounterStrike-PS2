@@ -72,8 +72,13 @@ void HUD::renderTimer() {
 
         if (remainSeconds < 1) {
 
-            remainMinutes--;
             remainSeconds = 60;
+            shouldSubtractMinute = true;
+        }
+        else if (shouldSubtractMinute) {
+
+            remainMinutes--;
+            shouldSubtractMinute = false;
         }
 
         if (remainMinutes < 0) {

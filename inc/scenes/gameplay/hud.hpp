@@ -28,6 +28,8 @@ class HUD {
 
         bool debugModeActivated = false;
 
+        bool shouldSubtractMinute = false;
+
         int money = 800;
         float health = 100;
 
