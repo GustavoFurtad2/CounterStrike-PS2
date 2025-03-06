@@ -79,10 +79,7 @@ class Gun : public Item {
 
         std::chrono::high_resolution_clock::time_point timerSincePlayerIsWalking;
 
-        Tyra::Vec4 calculateRotationFromDirection(const Tyra::Vec4 &direction);
-        Tyra::Vec4 getOffsetInDirection(const Tyra::Vec4& direction, const Tyra::Vec4& gunOffset);
         Tyra::Vec4 calculateBobbingOffsetInDirection(const Camera &playerCamera);
-        Tyra::Vec4 crossProduct(const Tyra::Vec4& a, const Tyra::Vec4& b);
 
         Tyra::Vec4 cameraDirection, rotationAngles, position, bobbingOffset;
 
