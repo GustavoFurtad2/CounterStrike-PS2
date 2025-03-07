@@ -12,8 +12,7 @@ class LoadingScreen {
         ~LoadingScreen();
 
         void init();
-        void draw();
-        void update();
+        void handleLoader();
 
         template <typename T, typename... Args>
         std::unique_ptr<T> addTask(Args&&... args) {
@@ -24,8 +23,11 @@ class LoadingScreen {
 
     private:
 
+        void draw();
+        void update();
+
         unsigned int itemsToLoad = 0;
-        unsigned int loadedItems = 0;
+        int loadedItems = -1;
 
         const unsigned int maxProgress = 21;
 

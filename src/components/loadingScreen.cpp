@@ -1,5 +1,6 @@
 #include "components/loadingScreen.hpp"
 
+
 LoadingScreen::LoadingScreen(unsigned int itemsToLoad) : itemsToLoad(itemsToLoad) {}
 
 void LoadingScreen::init() {
@@ -25,6 +26,12 @@ void LoadingScreen::draw() {
 void LoadingScreen::update() {
 
    loadedItems++;
+}
+
+void LoadingScreen::handleLoader() {
+
+    update();
+    draw();
 }
 
 LoadingScreen::~LoadingScreen() {}

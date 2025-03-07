@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include <string>
 
 namespace Cs {
 
@@ -23,6 +24,10 @@ namespace Cs {
     void CSGame::loop() {
 
         sceneManager.handleScene();
+
+        if (engine->pad.getClicked().Circle) {
+            TYRA_LOG("RAM: " + std::to_string(engine->info.getAvailableRAM()));
+        }
     }
 
     Tyra::Engine* GetEngine() {

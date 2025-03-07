@@ -22,9 +22,9 @@ class HUD {
 
         void displayNumber(unsigned int number, Tyra::Vec2 position, Tyra::Color color);
 
-        void renderMoney();
-        void renderTimer();
-        void renderGunIcons();
+        void displayMoney();
+        void displayTimer();
+        void displayGunIcons();
 
         bool debugModeActivated = false;
 

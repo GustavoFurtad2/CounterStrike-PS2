@@ -48,7 +48,7 @@ void HUD::displayNumber(unsigned int number, Tyra::Vec2 position, Tyra::Color co
     }
 }
 
-void HUD::renderMoney() {
+void HUD::displayMoney() {
 
     static Tyra::Color currentColor(0, 255, 0, 48);
     Tyra::Color targetColor(252, 140, 0, 48);
@@ -59,7 +59,7 @@ void HUD::renderMoney() {
     displayNumber(money, Tyra::Vec2(479, 373), currentColor);
 }
 
-void HUD::renderTimer() {
+void HUD::displayTimer() {
     
     std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = now - startTimer;
@@ -99,7 +99,7 @@ void HUD::renderTimer() {
     }
 }
 
-void HUD::renderGunIcons() {
+void HUD::displayGunIcons() {
 
     if (gunIconColor.a > 0 ) {
         gunIconAtlas10.renderSprite("ak47Icon", gunIconColor);
@@ -130,9 +130,9 @@ void HUD::render(int bulletsGun, int bulletsPerCartridge, int cartridges) {
     displayNumber(0, Tyra::Vec2(155, 414), Tyra::Color(252, 140, 0, 48));
     displayNumber(static_cast<int>(health), Tyra::Vec2(64, 414), Tyra::Color(252, 140, 0, 48));
 
-    renderMoney();
-    renderTimer();
-    renderGunIcons();
+    displayMoney();
+    displayTimer();
+    displayGunIcons();
 
     radar.render(Tyra::Color(255, 255, 255, 48));
 

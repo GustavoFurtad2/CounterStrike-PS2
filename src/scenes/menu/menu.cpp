@@ -14,11 +14,10 @@ void Menu::init() {
 
     Cs::GetEngine()->font.loadFont(&menuFont, 32, Tyra::FileUtils::fromCwd("assets/menu/trebuc.ttf").c_str());
 
-    loadingScreen.init();
-
     title.init("assets/menu/title.png", Tyra::Vec2(20, 413), Tyra::Vec2(256, 21));
     background.init("assets/menu/background.png", Tyra::Vec2(0, 0), Tyra::Vec2(512, 448));
 
+    loadingScreen.init();
 }
 
 void Menu::update() {
@@ -66,48 +65,42 @@ void Menu::render() {
         font.unloadFontDataVRAM(&menuFont);
 
         renderer.beginFrame();
-        background.render();
-        loadingScreen.draw();
+        loadingScreen.handleLoader();
         renderer.endFrame();
 
         auto hud = loadingScreen.addTask<HUD>();
 
         renderer.beginFrame();
         background.render();
-        loadingScreen.update();
-        loadingScreen.draw();
+        loadingScreen.handleLoader();
         renderer.endFrame();
 
         auto usp = loadingScreen.addTask<Gun>();
 
         renderer.beginFrame();
         background.render();
-        loadingScreen.update();
-        loadingScreen.draw();
+        loadingScreen.handleLoader();
         renderer.endFrame();
 
         auto ak47 = loadingScreen.addTask<Gun>();
 
         renderer.beginFrame();
         background.render();
-        loadingScreen.update();
-        loadingScreen.draw();
+        loadingScreen.handleLoader();
         renderer.endFrame();
 
         auto player = loadingScreen.addTask<Player>(std::move(hud), std::move(usp), std::move(ak47));
         
         renderer.beginFrame();
         background.render();
-        loadingScreen.update();
-        loadingScreen.draw();
+        loadingScreen.handleLoader();
         renderer.endFrame();
 
         auto map = loadingScreen.addTask<Model>("assets/gameplay/maps/de_dust2/De_dust2.obj", "assets/gameplay/maps/de_dust2/", 500.0f);
 
         renderer.beginFrame();
         background.render();
-        loadingScreen.update();
-        loadingScreen.draw();
+        loadingScreen.handleLoader();
         renderer.endFrame();
 
         Cs::changeScene(std::make_unique<Gameplay>(sceneManager, std::move(player), std::move(map)));

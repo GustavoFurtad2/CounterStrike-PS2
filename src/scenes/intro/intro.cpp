@@ -21,7 +21,7 @@ void Intro::update() {
     std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
     std::chrono::milliseconds elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - remainScreenTime);
 
-    if (static_cast<int>(elapsed.count()) >= 7000) {
+    if (elapsed.count() >= 7000.0f) {
         Cs::changeScene(std::make_unique<Menu>(sceneManager));
     }
 }
