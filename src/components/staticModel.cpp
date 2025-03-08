@@ -1,7 +1,15 @@
 #include "components/staticModel.hpp"
 #include "game.hpp"
 
-Model::Model(const char modelPath[], const char texturePath[], float scale) {
+Model::Model() {}
+
+Model::~Model() {
+
+    Cs::GetEngine()->renderer.getTextureRepository().freeByMesh(mesh.get());
+    TYRA_LOG("Release: Static Model Component");
+}
+
+void Model::init(const char modelPath[], const char texturePath[], float scale) {
 
     stapip.setRenderer(& Cs::GetEngine()->renderer.core);
 
@@ -16,12 +24,6 @@ Model::Model(const char modelPath[], const char texturePath[], float scale) {
     renderOptions.frustumCulling = Tyra::PipelineFrustumCulling_None;
     
     Cs::GetEngine()->renderer.getTextureRepository().addByMesh(mesh.get(), Tyra::FileUtils::fromCwd(texturePath), "png");
-}
-
-Model::~Model() {
-
-    Cs::GetEngine()->renderer.getTextureRepository().freeByMesh(mesh.get());
-    TYRA_LOG("Release: Static Model Component");
 }
 
 void Model::render() {

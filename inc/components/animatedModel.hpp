@@ -6,9 +6,10 @@ class AnimatedModel {
 
     public:
 
-        AnimatedModel(const char modelPath[], const char texturePath[], float scale);
+        AnimatedModel();
         ~AnimatedModel();
 
+        void init(const char modelPath[], const char texturePath[], float scale);
         void render();
 
         bool animationFinished = false;

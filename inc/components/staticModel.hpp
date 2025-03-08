@@ -6,9 +6,10 @@ class Model {
 
     public:
 
-        Model(const char modelPath[], const char texturePath[], float scale);
+        Model();
         ~Model();
 
+        void init(const char modelPath[], const char texturePath[], float scale);
         void render();
 
         Tyra::StaticMesh* getMesh() {
