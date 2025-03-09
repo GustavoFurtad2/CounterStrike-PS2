@@ -65,6 +65,7 @@ void Menu::render() {
         font.unloadFontDataVRAM(&menuFont);
 
         renderer.beginFrame();
+        background.render();
         loadingScreen.handleLoader();
         renderer.endFrame();
 
