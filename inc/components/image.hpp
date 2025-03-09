@@ -10,6 +10,7 @@ class Image {
         ~Image();
 
         void init(const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size);
+        void init(const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size, Tyra::SpriteMode spriteMode);
         void render();
         void render(Tyra::Color color);
         void render(Tyra::Vec2 position, Tyra::Vec2 size);

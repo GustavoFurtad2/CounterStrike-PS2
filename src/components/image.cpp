@@ -26,6 +26,23 @@ void Image::init(const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size) {
 
 }
 
+void Image::init(const char imagePath[], Tyra::Vec2 position, Tyra::Vec2 size, Tyra::SpriteMode spriteMode) {
+
+    image.mode = spriteMode;
+
+    image.position = position;
+    image.size = size;
+
+    auto& textureRepository = Cs::GetEngine()->renderer.getTextureRepository();
+
+    auto filepath = Tyra::FileUtils::fromCwd(imagePath);
+
+    auto* texture = textureRepository.add(filepath);
+
+    texture->addLink(image.id);
+
+}
+
 void Image::render() {
 
     Cs::GetEngine()->renderer.renderer2D.render(image);
