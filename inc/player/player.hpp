@@ -44,24 +44,22 @@ class Player {
         std::unique_ptr<Gun> usp;
         std::unique_ptr<Gun> ak47;
 
-        Image mid;
-        Image terror;
-        Image csLogo;
-        Image selectTeam;
-        Image chooseAClass;
-        Image optionPhoenix;
-        Image roundCornerTopLeft;
-        Image roundCornerTopRight;
-        Image roundCornerBottomLeft;
-        Image roundCornerBottomRight;
-        Image characterBackground;
-        Image optionTerroristForces;
+        // Image mid;
+        // Image terror;
+        // Image csLogo;
+        // Image selectTeam;
+        // Image chooseAClass;
+        // Image optionPhoenix;
+        // Image roundCornerTopLeft;
+        // Image roundCornerTopRight;
+        // Image roundCornerBottomLeft;
+        // Image roundCornerBottomRight;
+        // Image characterBackground;
+        // Image optionTerroristForces;
 
         Gun* equippedGun;
 
         int currentGunIndex = 1;
-
-        bool holdingTriangle = false;
 
         Camera camera;
 

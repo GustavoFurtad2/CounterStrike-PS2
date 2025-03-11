@@ -46,9 +46,9 @@ class Menu : public Cs::Scene {
 
         Cs::SceneManager& sceneManager;
 
+        bool shouldChangeScene = false;
+
         Image title;
         Image background;
-
-        LoadingScreen loadingScreen;
 
 };
