@@ -65,11 +65,35 @@ void TextureAtlas::renderSprite(const std::string& name) {
         Cs::GetEngine()->renderer.renderer2D.render(*sprite);
     }
 }
+
 void TextureAtlas::renderSprite(const std::string& name, const Tyra::Color& color) {
 
     Tyra::Sprite* sprite = getSprite(name);
 
     if (sprite) {
+        sprite->color = color;
+        Cs::GetEngine()->renderer.renderer2D.render(*sprite);
+    }
+}
+
+void TextureAtlas::renderSprite(const std::string& name, const Tyra::Vec2& position, const Tyra::Vec2& size) {
+
+    Tyra::Sprite* sprite = getSprite(name);
+
+    if (sprite) {
+        sprite->position = position;
+        sprite->size = size;
+        Cs::GetEngine()->renderer.renderer2D.render(*sprite);
+    }
+}
+
+void TextureAtlas::renderSprite(const std::string& name, const Tyra::Vec2& position, const Tyra::Vec2& size, const Tyra::Color& color) {
+
+    Tyra::Sprite* sprite = getSprite(name);
+
+    if (sprite) {
+        sprite->position = position;
+        sprite->size = size;
         sprite->color = color;
         Cs::GetEngine()->renderer.renderer2D.render(*sprite);
     }

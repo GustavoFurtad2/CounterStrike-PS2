@@ -20,6 +20,8 @@ class TextureAtlas {
 
         void renderSprite(const std::string& name);
         void renderSprite(const std::string& name, const Tyra::Color& color);
+        void renderSprite(const std::string& name, const Tyra::Vec2& position, const Tyra::Vec2& size);
+        void renderSprite(const std::string& name, const Tyra::Vec2& position, const Tyra::Vec2& size, const Tyra::Color& color);
 
     private:
 
