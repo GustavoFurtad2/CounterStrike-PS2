@@ -35,7 +35,7 @@ class Gameplay : public Cs::Scene {
 
         Cs::SceneManager& sceneManager;
 
-        Image loadingBackground;
-        LoadingScreen loadingScreen;
+        Image* loadingBackground;
+        LoadingScreen* loadingScreen;
 
 };
