@@ -2,9 +2,10 @@
 #include "utils.hpp"
 #include "game.hpp"
 
-Player::Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _ak47) 
+Player::Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _glock18, std::unique_ptr<Gun> _ak47) 
   : hud(std::move(_hud)), 
     usp(std::move(_usp)),
+    glock18(std::move(_glock18)),
     ak47(std::move(_ak47)) {
 
     equippedGun = usp.get();
@@ -33,6 +34,21 @@ void Player::init() {
     uspData[9]->init("assets/gameplay/guns/usp/silencer.md2", "assets/gameplay/guns/usp/", 25.0f);
 
     usp->init("usp", 30, uspData);
+
+    std::vector<AnimatedModel*> glock18Data = {new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel()};
+
+    glock18Data[0]->init("assets/gameplay/guns/glock18/left_arm.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[1]->init("assets/gameplay/guns/glock18/left_finger.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[2]->init("assets/gameplay/guns/glock18/left_glove.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[3]->init("assets/gameplay/guns/glock18/right_arm.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[4]->init("assets/gameplay/guns/glock18/right_finger.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[5]->init("assets/gameplay/guns/glock18/right_glove.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[6]->init("assets/gameplay/guns/glock18/slide.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[7]->init("assets/gameplay/guns/glock18/barrel.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[8]->init("assets/gameplay/guns/glock18/base.md2", "assets/gameplay/guns/glock18/", 25.0f);
+    glock18Data[9]->init("assets/gameplay/guns/glock18/slide.md2", "assets/gameplay/guns/glock18/", 25.0f);
+
+    glock18->init("glock18", 30, glock18Data);
 
     std::vector<AnimatedModel*> ak47Data = {new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel()};
 
@@ -68,6 +84,9 @@ void Player::init() {
 
     usp->setIdleAnimationKeyframe({0});
     usp->setShootAnimationKeyframe({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29});
+
+    glock18->setIdleAnimationKeyframe({0});
+    glock18->setShootAnimationKeyframe({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18});
 
     ak47->setIdleAnimationKeyframe({0});
     ak47->setShootAnimationKeyframe({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16});
@@ -183,6 +202,9 @@ void Player::renderGun() {
 
     if (currentGunIndex == static_cast<int>(gunType::Usp)) {
         equippedGun = usp.get();
+    }
+    else if (currentGunIndex == static_cast<int>(gunType::Glock18)) {
+        equippedGun = glock18.get();
     }
     else if (currentGunIndex == static_cast<int>(gunType::Ak47)) {
         equippedGun = ak47.get();

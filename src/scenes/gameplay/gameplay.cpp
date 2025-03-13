@@ -41,6 +41,13 @@ void Gameplay::init() {
     loadingBackground->render();
     loadingScreen->handleLoader();
     renderer.endFrame();
+    
+    auto glock18 = loadingScreen->addTask<Gun>();
+
+    renderer.beginFrame();
+    loadingBackground->render();
+    loadingScreen->handleLoader();
+    renderer.endFrame();
 
     auto ak47 = loadingScreen->addTask<Gun>();
 
@@ -49,7 +56,7 @@ void Gameplay::init() {
     loadingScreen->handleLoader();
     renderer.endFrame();
 
-    player = loadingScreen->addTask<Player>(std::move(hud), std::move(usp), std::move(ak47));
+    player = loadingScreen->addTask<Player>(std::move(hud), std::move(usp), std::move(glock18), std::move(ak47));
     
     player->init();
 

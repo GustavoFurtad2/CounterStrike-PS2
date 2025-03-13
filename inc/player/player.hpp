@@ -7,6 +7,7 @@
 
 enum class gunType {
     Usp,
+    Glock18,
     Ak47,
     TotalGunTypeItems
 };
@@ -21,7 +22,7 @@ class Player {
 
     public:
 
-        Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _ak47);
+        Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _glock18, std::unique_ptr<Gun> _ak47);
         ~Player();
 
         void init();
@@ -42,6 +43,7 @@ class Player {
         std::unique_ptr<HUD> hud;
 
         std::unique_ptr<Gun> usp;
+        std::unique_ptr<Gun> glock18;
         std::unique_ptr<Gun> ak47;
 
         Image mid;
