@@ -75,6 +75,14 @@ class Gun : public Item {
 
         bool isShootable = true;
 
+        void setIdleAnimationKeyframe(const std::vector<unsigned int> &animationKeyframe) {
+            idleAnimationKeyframe = animationKeyframe;
+        }
+
+        void setShootAnimationKeyframe(const std::vector<unsigned int> &animationKeyframe) {
+            shootAnimationKeyframe = animationKeyframe;
+        }
+
     private:
 
         std::chrono::high_resolution_clock::time_point timerSincePlayerIsWalking;
@@ -87,8 +95,8 @@ class Gun : public Item {
 
         bool isShooting = false;
 
-        const std::vector<unsigned int>idleAnimationKeyframe = {0};
-        const std::vector<unsigned int>shootAnimationKeyframe = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+        std::vector<unsigned int>idleAnimationKeyframe = {0};
+        std::vector<unsigned int>shootAnimationKeyframe = {0};
         
         void setAnimationIdle();
         void setAnimationShoot();
