@@ -2,7 +2,7 @@
 
 Counter Strike PS2 is a recreation/demake(not a port) of the game Counter Strike for the Playstation 2
 
-Currently the project is in pre-alpha(also known as prototype)
+Currently the project is in pre-alpha(also known as prototype) at version 0.3.0
 
 # How you should compile?
 
