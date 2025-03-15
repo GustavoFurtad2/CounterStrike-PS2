@@ -21,7 +21,7 @@ void AnimatedModel::init(const char modelPath[], const char texturePath[], float
 
     mesh = std::make_unique<Tyra::DynamicMesh>(data.get());
 
-    mesh->animation.speed = 0.25f;
+    mesh->animation.speed = 0.45f;
 
     mesh->animation.setCallback([this](const Tyra::AnimationSequenceCallback& callback) {
         this->animationCallback(callback);
