@@ -114,6 +114,14 @@ void HUD::update() {
     if (Cs::GetEngine()->pad.getClicked().Select) {
         debugModeActivated = !debugModeActivated;
     }
+
+    if (debugModeActivated) {
+
+        if (Cs::GetEngine()->pad.getClicked().Square) {
+            vsync = !vsync;
+            Cs::GetEngine()->renderer.setFrameLimit(vsync);
+        }
+    }
 }
 
 void HUD::render(int bulletsGun, int bulletsPerCartridge, int cartridges) {

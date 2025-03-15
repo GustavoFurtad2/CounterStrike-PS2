@@ -30,6 +30,8 @@ class HUD {
 
         bool shouldSubtractMinute = false;
 
+        bool vsync = false;
+
         int money = 800;
         float health = 100;
 
