@@ -6,9 +6,10 @@
 #include "scenes/gameplay/hud.hpp"
 
 enum class gunType {
-    Usp,
     Glock18,
     Ak47,
+    Usp,
+    M4a1,
     TotalGunTypeItems
 };
 
@@ -22,7 +23,7 @@ class Player {
 
     public:
 
-        Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _glock18, std::unique_ptr<Gun> _ak47);
+        Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _glock18, std::unique_ptr<Gun> _ak47, std::unique_ptr<Gun> _m4a1);
         ~Player();
 
         void init();
@@ -45,6 +46,7 @@ class Player {
         std::unique_ptr<Gun> usp;
         std::unique_ptr<Gun> glock18;
         std::unique_ptr<Gun> ak47;
+        std::unique_ptr<Gun> m4a1;
 
         Image mid;
         Image terror;

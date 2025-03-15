@@ -2,11 +2,12 @@
 #include "utils.hpp"
 #include "game.hpp"
 
-Player::Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _glock18, std::unique_ptr<Gun> _ak47) 
+Player::Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _glock18, std::unique_ptr<Gun> _ak47, std::unique_ptr<Gun> _m4a1) 
   : hud(std::move(_hud)), 
     usp(std::move(_usp)),
     glock18(std::move(_glock18)),
-    ak47(std::move(_ak47)) {
+    ak47(std::move(_ak47)),
+    m4a1(std::move(_m4a1)) {
 
     equippedGun = usp.get();
 }
@@ -69,6 +70,23 @@ void Player::init() {
 
     ak47->init("ak47", 30, ak47Data);
 
+    std::vector<AnimatedModel*> m4a1Data = {new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel()};
+
+    m4a1Data[0]->init("assets/gameplay/guns/m4a1/left_arm.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[1]->init("assets/gameplay/guns/m4a1/left_finger.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[2]->init("assets/gameplay/guns/m4a1/left_glove.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[3]->init("assets/gameplay/guns/m4a1/right_arm.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[4]->init("assets/gameplay/guns/m4a1/right_finger.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[5]->init("assets/gameplay/guns/m4a1/right_glove.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[6]->init("assets/gameplay/guns/m4a1/barrel.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[7]->init("assets/gameplay/guns/m4a1/buttstock.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[8]->init("assets/gameplay/guns/m4a1/handle.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[9]->init("assets/gameplay/guns/m4a1/magazine.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[10]->init("assets/gameplay/guns/m4a1/receiver.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+    m4a1Data[11]->init("assets/gameplay/guns/m4a1/silencer.md2", "assets/gameplay/guns/m4a1/", 25.0f);
+
+    m4a1->init("m4a1", 30, m4a1Data);
+
     mid.init("assets/gui/mid.png", Tyra::Vec2(68, 20), Tyra::Vec2(368, 48));
     terror.init("assets/gui/terror.png", Tyra::Vec2(213, 120), Tyra::Vec2(196, 188));
     csLogo.init("assets/gui/CS_logo.png", Tyra::Vec2(24, 24), Tyra::Vec2(32, 32));
@@ -90,6 +108,9 @@ void Player::init() {
 
     ak47->setIdleAnimationKeyframe({0});
     ak47->setShootAnimationKeyframe({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16});
+
+    m4a1->setIdleAnimationKeyframe({0});
+    m4a1->setShootAnimationKeyframe({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28});
 }
 
 void Player::update() {
@@ -208,6 +229,9 @@ void Player::renderGun() {
     }
     else if (currentGunIndex == static_cast<int>(gunType::Ak47)) {
         equippedGun = ak47.get();
+    }
+    else if (currentGunIndex == static_cast<int>(gunType::M4a1)) {
+        equippedGun = m4a1.get();
     }
 
     equippedGun->render(camera, Tyra::Vec4(35.0f, -15.0f, 15.0f), Tyra::Vec4(Cs::Utils::degreesToRadians(95), 0.0f, 0.0f));

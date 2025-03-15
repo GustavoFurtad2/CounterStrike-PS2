@@ -5,7 +5,7 @@
 
 Gameplay::Gameplay(Cs::SceneManager& _sceneManager) 
   : sceneManager(_sceneManager),
-    loadingScreen(new LoadingScreen(5)),
+    loadingScreen(new LoadingScreen(6)),
     loadingBackground(new Image()) {}
 
 Gameplay::~Gameplay() {
@@ -56,7 +56,14 @@ void Gameplay::init() {
     loadingScreen->handleLoader();
     renderer.endFrame();
 
-    player = loadingScreen->addTask<Player>(std::move(hud), std::move(usp), std::move(glock18), std::move(ak47));
+    auto m4a1 = loadingScreen->addTask<Gun>();
+
+    renderer.beginFrame();
+    loadingBackground->render();
+    loadingScreen->handleLoader();
+    renderer.endFrame();
+
+    player = loadingScreen->addTask<Player>(std::move(hud), std::move(usp), std::move(glock18), std::move(ak47), std::move(m4a1));
     
     player->init();
 
