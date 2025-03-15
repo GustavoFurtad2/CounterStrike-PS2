@@ -27,9 +27,6 @@ void Menu::update() {
             if (selectedOption == MenuOption::NewGame) {
                 shouldChangeScene = true;
             }
-            else if (selectedOption == MenuOption::Credits) {
-                currentMenuState = MenuState::Credits;
-            }
     
         }
         else if (Cs::GetEngine()->pad.getClicked().DpadUp) {
@@ -51,13 +48,6 @@ void Menu::update() {
             Cs::changeScene(std::make_unique<Gameplay>(sceneManager));
         }    
     }
-    else if (currentMenuState == MenuState::Credits) {
-
-        if (Cs::GetEngine()->pad.getClicked().Triangle) {
-
-            currentMenuState = MenuState::MainMenu;    
-        }
-    }
 }
 
 void Menu::render() {
@@ -72,14 +62,7 @@ void Menu::render() {
     title.render();
 
     if (currentMenuState == MenuState::MainMenu) {
-        font.drawText(&menuFont, "New Game", 20, 355, 14, Tyra::Color(255.0f, 255.0f, selectedOption == MenuOption::NewGame ? 0 : 255.0f, 128.0f));
-        font.drawText(&menuFont, "Credits", 20, 385, 14, Tyra::Color(255.0f, 255.0f, selectedOption == MenuOption::Credits ? 0 : 255.0f, 128.0f));
-    }
-    else if (currentMenuState == MenuState::Credits) {
-        font.drawText(&menuFont, "Credits", 20, 295, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
-        font.drawText(&menuFont, "Created by Fatality", 20, 325, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
-        font.drawText(&menuFont, "Thanks for helping me: GDQR(Edward), Wolf3s, Wellinator, Ez4r3k,", 20, 355, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
-        font.drawText(&menuFont, "Adryanprogames.", 20, 380, 14, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+        font.drawText(&menuFont, "New Game", 20, 385, 14, Tyra::Color(255.0f, 255.0f, selectedOption == MenuOption::NewGame ? 0 : 255.0f, 128.0f));
     }
 
     renderer.endFrame();

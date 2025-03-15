@@ -15,13 +15,11 @@ class SceneManager;
 
 enum class MenuOption {
     NewGame,
-    Credits,
     TotalOptions
 };
 
 enum class MenuState {
     MainMenu,
-    Credits
 };
 
 class Menu : public Cs::Scene {
