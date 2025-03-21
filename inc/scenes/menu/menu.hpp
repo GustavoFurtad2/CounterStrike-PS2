@@ -48,5 +48,6 @@ class Menu : public Cs::Scene {
 
         Image title;
         Image background;
+        Image padsCross;
 
 };

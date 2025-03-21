@@ -15,6 +15,7 @@ void Menu::init() {
     Cs::GetEngine()->font.loadFont(&menuFont, 32, Tyra::FileUtils::fromCwd("assets/menu/trebuc.ttf").c_str());
 
     title.init("assets/menu/title.png", Tyra::Vec2(20, 413), Tyra::Vec2(256, 21));
+    padsCross.init("assets/gui/pads/cross.png", Tyra::Vec2(430, 428), Tyra::Vec2(16, 16));
     background.init("assets/menu/background.png", Tyra::Vec2(0, 0), Tyra::Vec2(512, 448));
 }
 
@@ -63,6 +64,8 @@ void Menu::render() {
 
     if (currentMenuState == MenuState::MainMenu) {
         font.drawText(&menuFont, "New Game", 20, 385, 14, Tyra::Color(255.0f, 255.0f, selectedOption == MenuOption::NewGame ? 0 : 255.0f, 128.0f));
+        font.drawText(&menuFont, "Confirm", 453, 440, 12, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+        padsCross.render();
     }
 
     renderer.endFrame();

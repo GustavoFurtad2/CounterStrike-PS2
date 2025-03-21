@@ -14,12 +14,17 @@ Player::Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique
 
 Player::~Player() {
 
+    TYRA_LOG("Release: Gameplay Font");
+    Cs::GetEngine()->font.unloadFontDataVRAM(&gameplayFont);
+
     delete equippedGun;
 }
 
 void Player::init() {
 
     camera.position = Tyra::Vec4(14813.3f, 2340.0f, -10072.2f, 1.0f);
+
+    Cs::GetEngine()->font.loadFont(&gameplayFont, 32, Tyra::FileUtils::fromCwd("assets/menu/trebuc.ttf").c_str());
 
     std::vector<AnimatedModel*> uspData = {new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel(), new AnimatedModel()};
 
@@ -90,6 +95,7 @@ void Player::init() {
     mid.init("assets/gui/mid.png", Tyra::Vec2(68, 20), Tyra::Vec2(368, 48));
     terror.init("assets/gui/terror.png", Tyra::Vec2(213, 120), Tyra::Vec2(196, 188));
     csLogo.init("assets/gui/CS_logo.png", Tyra::Vec2(24, 24), Tyra::Vec2(32, 32));
+    padsCross.init("assets/gui/pads/cross.png", Tyra::Vec2(430, 428), Tyra::Vec2(16, 16));
     selectTeam.init("assets/gui/select_team.png", Tyra::Vec2(67, 35), Tyra::Vec2(128, 16));
     chooseAClass.init("assets/gui/choose_a_class.png", Tyra::Vec2(67, 35), Tyra::Vec2(128, 16));
     optionPhoenix.init("assets/gui/phoenix_button.png", Tyra::Vec2(67, 118), Tyra::Vec2(196, 24));
@@ -178,6 +184,10 @@ void Player::render() {
             selectTeam.render();
             optionTerroristForces.render();
 
+            Cs::GetEngine()->font.drawText(&gameplayFont, "Confirm", 453, 440, 12, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+
+            padsCross.render();
+
             break;
 
         case PlayerState::SelectingClass:
@@ -200,6 +210,10 @@ void Player::render() {
             optionPhoenix.render();
             characterBackground.render();
             terror.render();
+
+            Cs::GetEngine()->font.drawText(&gameplayFont, "Confirm", 453, 440, 12, Tyra::Color(255.0f, 255.0f, 255.0f, 128.0f));
+
+            padsCross.render();
 
             break;
 

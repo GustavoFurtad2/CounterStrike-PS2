@@ -48,9 +48,13 @@ class Player {
         std::unique_ptr<Gun> ak47;
         std::unique_ptr<Gun> m4a1;
 
+        Tyra::FontData gameplayFont;
+        Tyra::Sprite fontSprite;
+
         Image mid;
         Image terror;
         Image csLogo;
+        Image padsCross;
         Image selectTeam;
         Image chooseAClass;
         Image optionPhoenix;
