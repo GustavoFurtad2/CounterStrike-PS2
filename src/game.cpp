@@ -6,6 +6,7 @@ namespace Cs {
     static Tyra::Engine* engine;
 
     static SceneManager sceneManager;
+    static float dt = 1.0f / 60.0f;
 
     CSGame::CSGame(Tyra::Engine* t_engine) {
         engine = t_engine;
@@ -23,6 +24,12 @@ namespace Cs {
 
     void CSGame::loop() {
 
+        float fps = static_cast<float>(engine->info.getFps());
+
+        if (fps > 0.0f) {
+            dt = 1.0f / fps;
+        }
+
         sceneManager.handleScene();
 
         if (engine->pad.getClicked().Circle) {
@@ -32,6 +39,10 @@ namespace Cs {
 
     Tyra::Engine* GetEngine() {
         return engine;
+    }
+
+    float GetDeltaTime() {
+        return dt;
     }
 
     void changeScene(std::unique_ptr<Scene>&& scene) {

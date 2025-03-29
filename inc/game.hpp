@@ -23,6 +23,7 @@ namespace Cs {
     };
     
     Tyra::Engine* GetEngine();
+    float GetDeltaTime();
 
     void changeScene(std::unique_ptr<Scene>&& scene);
 
