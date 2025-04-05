@@ -16,6 +16,7 @@ void Model::init(const char modelPath[], const char texturePath[], float scale) 
     Tyra::ObjLoaderOptions options;
 
     options.scale = scale;
+    options.flipUVs = true;
 
     auto data = Tyra::ObjLoader::load(Tyra::FileUtils::fromCwd(modelPath), options);
 
