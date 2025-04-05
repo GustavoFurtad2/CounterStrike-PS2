@@ -1,0 +1,13 @@
+terroristForcesButton gameplay.png 1 1 148 20
+phoneixConnexionButton gameplay.png 1 21 148 20
+csLogo gameplay.png 160 1 45 60
+progressBar gameplay.png 207 4 8 16
+mid gameplay.png 256 1 256 128
+characterBackground gameplay.png 213 129 300 196
+roundTopLeft gameplay.png 447 330 64 64
+roundTopRight gameplay.png 255 330 64 64
+roundBottomLeft gameplay.png 383 330 64 64
+roundBottomRight gameplay.png 319 330 64 64
+terrorCharacterPicture gameplay.png 1 316 176 197
+selectTeamLabel gameplay.png 415 397 94 11
+chooseAClassLabel gameplay.png 393 413 116 11

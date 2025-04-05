@@ -11,17 +11,19 @@ class TextureAtlas {
 
     public:
 
-        TextureAtlas(Tyra::Engine* t_engine, const char texturePath[], const char configPath[], Tyra::Vec2 size);
+        TextureAtlas();
         ~TextureAtlas();
 
         Tyra::Sprite* getSprite(const std::string& name);
 
+        void init(const char texturePath[], const char configPath[], Tyra::Vec2 size);
+
         void renderSprite(const std::string& name);
         void renderSprite(const std::string& name, const Tyra::Color& color);
+        void renderSprite(const std::string& name, const Tyra::Vec2& position, const Tyra::Vec2& size);
+        void renderSprite(const std::string& name, const Tyra::Vec2& position, const Tyra::Vec2& size, const Tyra::Color& color);
 
     private:
-
-        Tyra::Engine* engine;
 
         Tyra::Sprite atlas;
 

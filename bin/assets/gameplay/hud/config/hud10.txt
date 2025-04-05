@@ -1,2 +1,2 @@
-ak47Icon hud10.png 0 0 170 46
-knifeIcon hud10.png 0 134 170 46
+ak47Icon hud10.png 1 1 169 45
+knifeIcon hud10.png 1 135 169 45

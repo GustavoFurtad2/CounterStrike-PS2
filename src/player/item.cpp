@@ -1,11 +1,18 @@
 #include "player/item.hpp"
 #include "utils.hpp"
+#include "game.hpp"
 
-Gun::Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels)
-  : Item(t_engine, name, ItemType::Gun, gunModels), baseDamage(baseDamage) {
+Item::Item() : type(ItemType::Gun) {}
 
-    setAnimationIdle();
+void Item::init(const std::string& name, ItemType type, const std::vector<AnimatedModel*>& itemModels) {
+
+    this->name = name;
+    this->type = type;
+
+    this->itemModels = itemModels;
 }
+
+Gun::Gun() : Item() {}
 
 Gun::~Gun() {
 
@@ -16,6 +23,12 @@ Gun::~Gun() {
     itemModels.clear();
 
     TYRA_LOG("Release: Gun " + name);
+}
+
+void Gun::init(const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels) {
+
+    Item::init(name, ItemType::Gun, gunModels);
+    setAnimationIdle();
 }
 
 void Gun::update(const Camera &playerCamera) {
@@ -36,7 +49,7 @@ void Gun::update(const Camera &playerCamera) {
         bobbingOffset.z = Cs::Utils::lerp(bobbingOffset.z, 0.0f, 0.1);
     }
 
-    if (engine->pad.getPressed().R2 && !isShooting && isShootable) {
+    if (Cs::GetEngine()->pad.getPressed().R2 && !isShooting && isShootable) {
 
         isShooting = true;
         setAnimationShoot();
@@ -77,8 +90,8 @@ void Gun::render(const Camera &playerCamera, const Tyra::Vec4 &gunPositionOffset
 
     for (auto model : itemModels) {
 
-        rotationAngles = calculateRotationFromDirection(cameraDirection);
-        position = playerCamera.position + getOffsetInDirection(cameraDirection, gunPositionOffset + bobbingOffset);
+        rotationAngles = Cs::Utils::calculateRotationFromDirection(cameraDirection);
+        position = playerCamera.position + Cs::Utils::getOffsetByDirection(cameraDirection, gunPositionOffset + bobbingOffset);
 
         rotationAngles.x = rotationAngles.x - gunAngleOffset.x;
         rotationAngles.y = rotationAngles.y - gunAngleOffset.y;
@@ -107,29 +120,4 @@ void Gun::setAnimationShoot() {
     }
 
     currentAnimation = AnimationType::Shoot;
-}
-
-Tyra::Vec4 Gun::calculateRotationFromDirection(const Tyra::Vec4& direction) {
-
-    float pitch = Tyra::Math::atan2(direction.y, sqrt(direction.x * direction.x + direction.z * direction.z));
-    float yaw = Tyra::Math::atan2(direction.x, direction.z);
-
-    return Tyra::Vec4(-pitch, yaw, 0.0f);
-}
-
-Tyra::Vec4 Gun::getOffsetInDirection(const Tyra::Vec4& direction, const Tyra::Vec4& gunOffset) {
-
-    Tyra::Vec4 forward = direction.getNormalized();
-
-    Tyra::Vec4 up(0.0f, 1.0f, 0.0f);
-    Tyra::Vec4 right = crossProduct(forward, up).getNormalized();
-    Tyra::Vec4 correctedUp = crossProduct(right, forward).getNormalized();
-
-    Tyra::Vec4 offsetGlobal = (right * gunOffset.x) + (correctedUp * gunOffset.y) + (forward * gunOffset.z);
-
-    return offsetGlobal;
-}
-
-Tyra::Vec4 Gun::crossProduct(const Tyra::Vec4& a, const Tyra::Vec4& b) {
-    return Tyra::Vec4(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x, 1);
 }

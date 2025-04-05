@@ -2,24 +2,33 @@
 
 #include "player/item.hpp"
 #include "player/camera.hpp"
+#include "components/image.hpp"
 #include "scenes/gameplay/hud.hpp"
 
 enum class gunType {
-    Usp,
+    Glock18,
     Ak47,
+    Usp,
+    M4a1,
     TotalGunTypeItems
+};
+
+enum class PlayerState {
+    SelectingTeam,
+    SelectingClass,
+    Playing
 };
 
 class Player {
 
     public:
 
-        Player(Tyra::Engine* t_engine);
+        Player(std::unique_ptr<HUD> _hud, std::unique_ptr<Gun> _usp, std::unique_ptr<Gun> _glock18, std::unique_ptr<Gun> _ak47, std::unique_ptr<Gun> _m4a1);
         ~Player();
 
+        void init();
         void update();
-        void renderHUD();
-        void renderGun();
+        void render();
 
         Tyra::CameraInfo3D getCameraInfo() {
             return camera.getCameraInfo();
@@ -27,17 +36,34 @@ class Player {
 
     private:
 
-        Tyra::Engine* engine;
+        PlayerState playerState = PlayerState::SelectingTeam;
 
-        HUD hud;
+        void renderHUD();
+        void renderGun();
 
-        Gun usp;
-        Gun ak47;
-        Gun *equippedGun;
+        std::unique_ptr<HUD> hud;
 
-        int currentGunIndex = 0;
+        std::unique_ptr<Gun> usp;
+        std::unique_ptr<Gun> glock18;
+        std::unique_ptr<Gun> ak47;
+        std::unique_ptr<Gun> m4a1;
 
-        bool holdingTriangle = false;
+        Image mid;
+        Image terror;
+        Image csLogo;
+        Image selectTeam;
+        Image chooseAClass;
+        Image optionPhoenix;
+        Image roundCornerTopLeft;
+        Image roundCornerTopRight;
+        Image roundCornerBottomLeft;
+        Image roundCornerBottomRight;
+        Image characterBackground;
+        Image optionTerroristForces;
+
+        Gun* equippedGun;
+
+        int currentGunIndex = 1;
 
         Camera camera;
 

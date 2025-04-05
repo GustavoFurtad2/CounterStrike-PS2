@@ -1,17 +1,32 @@
 #pragma once
 
+#include <memory>
 #include <iostream>
 
 #include "scene.hpp"
 #include "components/image.hpp"
+#include "components/staticModel.hpp"
+#include "components/loadingScreen.hpp"
+#include "player/player.hpp"
+#include "player/item.hpp"
+#include "scenes/gameplay/hud.hpp"
 
 class SceneManager;
+
+enum class MenuOption {
+    NewGame,
+    TotalOptions
+};
+
+enum class MenuState {
+    MainMenu,
+};
 
 class Menu : public Cs::Scene {
 
     public:
 
-        explicit Menu(Tyra::Engine* t_engine, Cs::SceneManager& sm);
+        explicit Menu(Cs::SceneManager& sm);
 
         ~Menu() override;
 
@@ -21,9 +36,15 @@ class Menu : public Cs::Scene {
 
     private:
 
-        Tyra::Engine* engine;
+        Tyra::FontData menuFont;
+        Tyra::Sprite fontSprite;
+
+        MenuOption selectedOption = MenuOption::NewGame;
+        MenuState currentMenuState = MenuState::MainMenu;
 
         Cs::SceneManager& sceneManager;
+
+        bool shouldChangeScene = false;
 
         Image title;
         Image background;

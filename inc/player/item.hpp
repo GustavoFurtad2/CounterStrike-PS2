@@ -24,9 +24,10 @@ class Item {
 
     public:
 
-        Item(Tyra::Engine* t_engine, const std::string& name, ItemType type, const std::vector<AnimatedModel*> itemModels)
-            : engine(t_engine), name(name), type(type), itemModels(itemModels) {};
+        Item();
         virtual ~Item() = default;
+
+        void init(const std::string& name, ItemType type, const std::vector<AnimatedModel*>& itemModels);
 
         std::string getName() const {
             return name;
@@ -37,8 +38,6 @@ class Item {
         }
 
     protected:
-
-        Tyra::Engine* engine;
 
         std::string name;
         ItemType type;
@@ -51,9 +50,10 @@ class Gun : public Item {
 
     public:
 
-        Gun(Tyra::Engine* t_engine, const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
+        Gun();
         ~Gun();
 
+        void init(const std::string& name, int baseDamage, const std::vector<AnimatedModel*> gunModels);
         void update(const Camera &playerCamera);
         void render(const Camera &playerCamera, const Tyra::Vec4 &gunPositionOffset, const Tyra::Vec4 &gunAngleOffset);
 
@@ -75,14 +75,19 @@ class Gun : public Item {
 
         bool isShootable = true;
 
+        void setIdleAnimationKeyframe(const std::vector<unsigned int> &animationKeyframe) {
+            idleAnimationKeyframe = animationKeyframe;
+        }
+
+        void setShootAnimationKeyframe(const std::vector<unsigned int> &animationKeyframe) {
+            shootAnimationKeyframe = animationKeyframe;
+        }
+
     private:
 
         std::chrono::high_resolution_clock::time_point timerSincePlayerIsWalking;
 
-        Tyra::Vec4 calculateRotationFromDirection(const Tyra::Vec4 &direction);
-        Tyra::Vec4 getOffsetInDirection(const Tyra::Vec4& direction, const Tyra::Vec4& gunOffset);
         Tyra::Vec4 calculateBobbingOffsetInDirection(const Camera &playerCamera);
-        Tyra::Vec4 crossProduct(const Tyra::Vec4& a, const Tyra::Vec4& b);
 
         Tyra::Vec4 cameraDirection, rotationAngles, position, bobbingOffset;
 
@@ -90,8 +95,8 @@ class Gun : public Item {
 
         bool isShooting = false;
 
-        const std::vector<unsigned int>idleAnimationKeyframe = {0};
-        const std::vector<unsigned int>shootAnimationKeyframe = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+        std::vector<unsigned int>idleAnimationKeyframe = {0};
+        std::vector<unsigned int>shootAnimationKeyframe = {0};
         
         void setAnimationIdle();
         void setAnimationShoot();
