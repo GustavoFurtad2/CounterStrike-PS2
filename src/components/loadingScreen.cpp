@@ -15,7 +15,7 @@ void LoadingScreen::draw() {
 
     unsigned int loadPart = maxProgress / itemsToLoad;
 
-    for (unsigned int i = 0; i <= loadPart * loadedItems; i++) {
+    for (unsigned int i = 0; i < loadPart * loadedItems; i++) {
 
         consoleProgressBar.setPosition(Tyra::Vec2(90 + (i * 12), 236));
         consoleProgressBar.render();

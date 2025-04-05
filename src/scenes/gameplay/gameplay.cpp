@@ -5,7 +5,7 @@
 
 Gameplay::Gameplay(Cs::SceneManager& _sceneManager) 
   : sceneManager(_sceneManager),
-    loadingScreen(new LoadingScreen(6)),
+    loadingScreen(new LoadingScreen(7)),
     loadingBackground(new Image()) {}
 
 Gameplay::~Gameplay() {
