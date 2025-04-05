@@ -7,9 +7,9 @@
 
 enum class gunType {
     Glock18,
-    Ak47,
-    Usp,
-    M4a1,
+    // Ak47,
+    // Usp,
+    // M4a1,
     TotalGunTypeItems
 };
 
@@ -43,10 +43,10 @@ class Player {
 
         std::unique_ptr<HUD> hud;
 
-        std::unique_ptr<Gun> usp;
+        // std::unique_ptr<Gun> usp;
         std::unique_ptr<Gun> glock18;
-        std::unique_ptr<Gun> ak47;
-        std::unique_ptr<Gun> m4a1;
+        // std::unique_ptr<Gun> ak47;
+        // std::unique_ptr<Gun> m4a1;
 
         Tyra::FontData gameplayFont;
         Tyra::Sprite fontSprite;
