@@ -26,6 +26,4 @@ class Intro : public Cs::Scene {
 
         std::chrono::high_resolution_clock::time_point remainScreenTime;
 
-        Image warning;
-
 };

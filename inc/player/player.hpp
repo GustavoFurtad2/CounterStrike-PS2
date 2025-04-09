@@ -51,20 +51,6 @@ class Player {
         Tyra::FontData gameplayFont;
         Tyra::Sprite fontSprite;
 
-        Image mid;
-        Image terror;
-        Image csLogo;
-        Image padsCross;
-        Image selectTeam;
-        Image chooseAClass;
-        Image optionPhoenix;
-        Image roundCornerTopLeft;
-        Image roundCornerTopRight;
-        Image roundCornerBottomLeft;
-        Image roundCornerBottomRight;
-        Image characterBackground;
-        Image optionTerroristForces;
-
         Gun* equippedGun;
 
         int currentGunIndex = 1;

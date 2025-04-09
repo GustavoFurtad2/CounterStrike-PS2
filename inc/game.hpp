@@ -7,6 +7,7 @@
 #include "scenes/menu/menu.hpp"
 #include "scenes/intro/intro.hpp"
 #include "scenes/gameplay/gameplay.hpp"
+#include "managers/textureManager.hpp"
 
 namespace Cs {
 
@@ -24,6 +25,8 @@ namespace Cs {
     
     Tyra::Engine* GetEngine();
     float GetDeltaTime();
+
+    TextureManager* GetTextureManager();
 
     void changeScene(std::unique_ptr<Scene>&& scene);
 

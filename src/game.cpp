@@ -6,10 +6,12 @@ namespace Cs {
     static Tyra::Engine* engine;
 
     static SceneManager sceneManager;
+    static TextureManager* textureManager;
     static float dt = 1.0f / 60.0f;
 
     CSGame::CSGame(Tyra::Engine* t_engine) {
         engine = t_engine;
+        textureManager = new TextureManager();
     }
 
     CSGame::~CSGame() {
@@ -39,6 +41,10 @@ namespace Cs {
 
     Tyra::Engine* GetEngine() {
         return engine;
+    }
+
+    TextureManager* GetTextureManager() {
+        return textureManager;
     }
 
     float GetDeltaTime() {
